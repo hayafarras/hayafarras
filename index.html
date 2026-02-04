@@ -3,44 +3,114 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Our Website is COMING SOON</title>
+  <title>Website is COMING SOON</title>
 
   <!-- Google Font Poppins -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
 
   <style>
-    body {
+    * {
       margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
       height: 100vh;
       display: flex;
       justify-content: center;
       align-items: center;
-      background-color: #eaf2ff; /* soft blue */
+      background: linear-gradient(135deg, #f6c1cc, #c7e2c4); /* pink x matcha */
       font-family: 'Poppins', sans-serif;
-      text-align: center;
+      overflow: hidden;
       color: #2c2c2c;
     }
 
+    /* Glitter stars */
+    body::before,
+    body::after {
+      content: "";
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, white, transparent),
+        radial-gradient(2px 2px at 70% 40%, white, transparent),
+        radial-gradient(1.5px 1.5px at 40% 80%, white, transparent),
+        radial-gradient(2px 2px at 80% 60%, white, transparent),
+        radial-gradient(1.5px 1.5px at 10% 70%, white, transparent);
+      animation: glitterMove 20s linear infinite;
+      opacity: 0.7;
+    }
+
+    body::after {
+      animation-duration: 35s;
+      opacity: 0.4;
+    }
+
+    @keyframes glitterMove {
+      from {
+        transform: translate(0, 0);
+      }
+      to {
+        transform: translate(-50%, -50%);
+      }
+    }
+
     .container {
-      animation: fadeIn 2s ease-in-out;
+      position: relative;
+      z-index: 2;
       max-width: 800px;
       padding: 20px;
+      animation: fadeIn 2s ease-in-out;
     }
 
     h1 {
-      font-size: 56px;
-      font-weight: 700; /* Poppins Bold */
-      margin: 0;
-      letter-spacing: 3px;
+      font-size: 58px;
+      font-weight: 700;
+      text-align: center;
+      letter-spacing: 4px;
+      color: #ffffff;
+      text-shadow:
+        0 0 5px #fff,
+        0 0 10px #ffd1dc,
+        0 0 20px #ffd1dc;
+      animation: glowText 2.5s ease-in-out infinite alternate,
+                 floatText 3s ease-in-out infinite;
     }
 
     p {
+      margin-top: 30px;
       font-size: 18px;
-      font-weight: 400; /* Poppins Regular */
-      margin-top: 25px;
-      color: #555;
-      line-height: 1.6;
+      font-weight: 400;
+      color: #444;
       text-align: left;
+      line-height: 1.7;
+      background: rgba(255, 255, 255, 0.6);
+      padding: 15px 20px;
+      border-radius: 12px;
+      backdrop-filter: blur(6px);
+    }
+
+    @keyframes glowText {
+      from {
+        text-shadow:
+          0 0 5px #fff,
+          0 0 10px #ffd1dc,
+          0 0 20px #ffd1dc;
+      }
+      to {
+        text-shadow:
+          0 0 10px #fff,
+          0 0 20px #ffc0cb,
+          0 0 35px #ffc0cb;
+      }
+    }
+
+    @keyframes floatText {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+      100% { transform: translateY(0); }
     }
 
     @keyframes fadeIn {
@@ -60,7 +130,7 @@
   <div class="container">
     <h1>COMING SOON</h1>
     <p>
-      Website Perpustakaan Haya Farras sedang dalam tahap pengembangan.<br>
+      Website Perpustakaan Haya Farras sedang dalam tahap pengembangan<br>
     </p>
   </div>
 

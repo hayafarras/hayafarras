@@ -3,10 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Website is COMING SOON</title>
+  <title>Perpustakaan Haya Farras</title>
 
-  <!-- Google Font Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
     * {
@@ -16,68 +15,113 @@
     }
 
     body {
-      height: 100vh;
+      min-height: 100vh;
       display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #dbeafe, #ffffff);
+      color: #2c2c2c;
+      overflow-x: hidden;
+    }
+
+    /* ================= INTRO ================= */
+    .intro {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #bfdbfe, #ffffff);
+      display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      background: linear-gradient(180deg, #dbeafe, #ffffff); /* soft blue to white */
-      font-family: 'Poppins', sans-serif;
-      overflow: hidden;
-      color: #2c2c2c;
+      z-index: 9999;
+      animation: fadeOut 1.5s ease forwards;
+      animation-delay: 2.5s;
     }
 
-    /* ⭐ STAR BACKGROUND */
-    body::before {
-      content: "";
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      background-image:
-        radial-gradient(1px 1px at 10% 20%, #ffffff, transparent),
-        radial-gradient(1.5px 1.5px at 30% 70%, #ffffff, transparent),
-        radial-gradient(1px 1px at 50% 40%, #ffffff, transparent),
-        radial-gradient(1.5px 1.5px at 70% 30%, #ffffff, transparent),
-        radial-gradient(1px 1px at 85% 80%, #ffffff, transparent),
-        radial-gradient(1.2px 1.2px at 20% 85%, #ffffff, transparent),
-        radial-gradient(1px 1px at 90% 10%, #ffffff, transparent);
-      animation: twinkle 4s infinite alternate;
-      opacity: 0.8;
-    }
-
-    @keyframes twinkle {
-      from { opacity: 0.4; }
-      to { opacity: 1; }
-    }
-
-    .container {
-      position: relative;
-      z-index: 2;
-      max-width: 800px;
-      padding: 20px;
-      animation: fadeIn 2s ease-in-out;
-    }
-
-    h1 {
-      font-size: 58px;
-      font-weight: 700;
+    .intro h1 {
+      font-size: 56px;
+      color: #1e3a8a;
       text-align: center;
-      letter-spacing: 4px;
+      animation: zoomIn 1.5s ease;
+    }
+
+    .intro h2 {
+      margin-top: 14px;
+      font-size: 22px;
+      font-weight: 500;
+      color: #2563eb;
+    }
+
+    @keyframes zoomIn {
+      from { opacity: 0; transform: scale(0.8); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* ================= HEADER ================= */
+    header {
+      background-color: #bfdbfe;
+      padding: 24px 32px;
+    }
+
+    header h1 {
+      font-size: 28px;
+      color: #1e3a8a;
+    }
+
+    /* ================= NAV ================= */
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 32px;
+      display: flex;
+      gap: 20px;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 18px;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+      z-index: 100;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2563eb;
+      transition: 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #1e3a8a;
+      text-decoration: underline;
+    }
+
+    /* ================= MAIN ================= */
+    main {
+      flex: 1;
+      max-width: 800px;
+      margin: 140px auto 0;
+      padding: 20px;
+      text-align: center;
+    }
+
+    main h2 {
+      font-size: 48px;
       color: #ffffff;
+      letter-spacing: 4px;
       text-shadow:
         0 0 6px #ffffff,
         0 0 12px #93c5fd,
         0 0 24px #93c5fd;
-      animation:
-        glowText 2.5s ease-in-out infinite alternate,
-        floatText 3s ease-in-out infinite;
+      animation: glowText 2.5s ease-in-out infinite alternate;
     }
 
-    p {
-      margin-top: 28px;
+    main p {
+      margin-top: 24px;
       font-size: 18px;
-      font-weight: 400;
       color: #4b5563;
-      text-align: left;
       line-height: 1.7;
     }
 
@@ -96,35 +140,102 @@
       }
     }
 
-    @keyframes floatText {
-      0% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-      100% { transform: translateY(0); }
+    /* ================= FOOTER ================= */
+    footer {
+      background-color: #93c5fd;
+      text-align: center;
+      padding: 28px 16px;
+      font-size: 14px;
+      color: #1e3a8a;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .footer-more {
+      margin-top: 12px;
+    }
+
+    .footer-more h4 {
+      font-size: 16px;
+      margin-bottom: 10px;
+      font-weight: 600;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      text-decoration: none;
+      background-color: #ffffff;
+      color: #1e3a8a;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-weight: 500;
+      transition: 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      background-color: #1e3a8a;
+      color: white;
     }
   </style>
 </head>
+
 <body>
 
-  <div class="container">
-    <h1>⭐COMING SOON⭐</h1>
-    <p>
-      Halo! Terima kasih telah berkunjung >.< <br>
-      Saat ini website Perpustakaan Haya Farras masih dalam proses tumbuh dan berkembang🌱 <br>
-        <br>
-      Mohon nantikan yaa! <br>
-    </p>
+  <!-- INTRO -->
+  <div class="intro">
+    <h1>Selamat Datang ✨</h1>
+    <h2>Perpustakaan Haya Farras</h2>
   </div>
+
+  <!-- HEADER -->
+  <header>
+    <h1>Perpustakaan Haya Farras</h1>
+  </header>
+
+  <!-- NAV -->
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="koleksi.html">Koleksi</a>
+    <a href="tentang.html">Tentang</a>
+    <a href="kontak.html">Kontak</a>
+  </nav>
+
+  <!-- MAIN -->
+  <main>
+    <h2>COMING SOON</h2>
+    <p>
+      Website Perpustakaan Haya Farras masih dalam tahap tumbuh dan berkembang 🌱  
+      <br><br>
+      Mohon nantikan!
+    </p>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    © 2026 Perpustakaan Haya Farras
+
+    <div class="footer-more">
+      <h4>More About Us</h4>
+      <div class="footer-links">
+        <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
+        <a href="https://drive.google.com/drive/folders/1xfyE7vIU5a05aADljtF3Ku4mBBQ_ZjrF?usp=drive_link" target="_blank">Curriculum Vitae</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- JS -->
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        const intro = document.querySelector(".intro");
+        if (intro) intro.style.display = "none";
+      }, 4000);
+    });
+  </script>
 
 </body>
 </html>

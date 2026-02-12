@@ -21,10 +21,9 @@
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(180deg, #dbeafe, #ffffff);
       color: #2c2c2c;
-      overflow-x: hidden;
     }
 
-    /* ================= INTRO ================= */
+    /* INTRO */
     .intro {
       position: fixed;
       inset: 0;
@@ -39,40 +38,30 @@
     }
 
     .intro h1 {
-      font-size: 56px;
+      font-size: 48px;
       color: #1e3a8a;
-      text-align: center;
-      animation: zoomIn 1.5s ease;
     }
 
     .intro h2 {
-      margin-top: 14px;
-      font-size: 22px;
-      font-weight: 500;
+      margin-top: 10px;
+      font-size: 20px;
       color: #2563eb;
-    }
-
-    @keyframes zoomIn {
-      from { opacity: 0; transform: scale(0.8); }
-      to { opacity: 1; transform: scale(1); }
     }
 
     @keyframes fadeOut {
       to { opacity: 0; visibility: hidden; }
     }
 
-    /* ================= HEADER ================= */
     header {
       background-color: #bfdbfe;
       padding: 24px 32px;
     }
 
     header h1 {
-      font-size: 28px;
+      font-size: 26px;
       color: #1e3a8a;
     }
 
-    /* ================= NAV ================= */
     nav {
       position: fixed;
       top: 20px;
@@ -83,151 +72,174 @@
       padding: 10px 18px;
       border-radius: 20px;
       backdrop-filter: blur(6px);
-      z-index: 100;
     }
 
     nav a {
       text-decoration: none;
       font-weight: 600;
       color: #2563eb;
-      transition: 0.3s ease;
     }
 
     nav a:hover {
-      color: #1e3a8a;
       text-decoration: underline;
     }
 
-    /* ================= MAIN ================= */
     main {
       flex: 1;
-      max-width: 800px;
-      margin: 140px auto 0;
+      max-width: 900px;
+      margin: 140px auto 40px;
       padding: 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
       text-align: center;
     }
 
-    main h2 {
-      font-size: 48px;
-      color: #ffffff;
-      letter-spacing: 4px;
-      text-shadow:
-        0 0 6px #ffffff,
-        0 0 12px #93c5fd,
-        0 0 24px #93c5fd;
-      animation: glowText 2.5s ease-in-out infinite alternate;
-    }
-
-    main p {
-      margin-top: 24px;
-      font-size: 18px;
-      color: #4b5563;
-      line-height: 1.7;
-    }
-
-    @keyframes glowText {
-      from {
-        text-shadow:
-          0 0 6px #ffffff,
-          0 0 12px #93c5fd,
-          0 0 24px #93c5fd;
-      }
-      to {
-        text-shadow:
-          0 0 10px #ffffff,
-          0 0 20px #60a5fa,
-          0 0 40px #60a5fa;
-      }
-    }
-
-    /* ================= FOOTER ================= */
-    footer {
-      background-color: #93c5fd;
-      text-align: center;
-      padding: 28px 16px;
-      font-size: 14px;
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
       color: #1e3a8a;
     }
 
-    .footer-more {
-      margin-top: 12px;
+    section p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #4b5563;
     }
 
-    .footer-more h4 {
-      font-size: 16px;
-      margin-bottom: 10px;
-      font-weight: 600;
+    /* ABOUT ME */
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
     }
 
-    .footer-links {
+    .about-container img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    /* MORE ABOUT ME */
+    .about-links {
+      margin-top: 15px;
       display: flex;
       justify-content: center;
-      gap: 16px;
+      gap: 15px;
       flex-wrap: wrap;
     }
 
-    .footer-links a {
+    .about-links a {
       text-decoration: none;
-      background-color: #ffffff;
+      background-color: #93c5fd;
       color: #1e3a8a;
-      padding: 6px 14px;
+      padding: 8px 18px;
       border-radius: 20px;
       font-weight: 500;
-      transition: 0.3s ease;
+      transition: 0.3s;
     }
 
-    .footer-links a:hover {
+    .about-links a:hover {
       background-color: #1e3a8a;
       color: white;
+    }
+
+    /* VIDEO */
+    .video-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
+
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 12px;
+    }
+
+    footer {
+      background-color: #93c5fd;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #1e3a8a;
     }
   </style>
 </head>
 
 <body>
 
-  <!-- INTRO -->
   <div class="intro">
     <h1>Selamat Datang ✨</h1>
     <h2>Perpustakaan Haya Farras</h2>
   </div>
 
-  <!-- HEADER -->
   <header>
     <h1>Perpustakaan Haya Farras</h1>
   </header>
 
-  <!-- NAV -->
   <nav>
     <a href="index.html">Home</a>
     <a href="koleksi.html">Koleksi</a>
-    <a href="tentang.html">Tentang</a>
     <a href="kontak.html">Kontak</a>
   </nav>
 
-  <!-- MAIN -->
   <main>
-    <h2>COMING SOON</h2>
-    <p>
-      Website Perpustakaan Haya Farras masih dalam tahap tumbuh dan berkembang 🌱  
-      <br><br>
-      Mohon nantikan!
-    </p>
+
+    <!-- TUJUAN WEBSITE -->
+    <section>
+      <h2>Tentang Website Ini</h2>
+      <p>
+        Website ini dibuat sebagai proyek pembuatan website perpustakaan pribadi.
+        Tujuannya adalah untuk menyediakan ruang digital yang dapat menampilkan
+        koleksi buku, informasi literasi, serta menjadi media pengembangan
+        kemampuan dalam bidang pengelolaan informasi dan teknologi web.
+      </p>
+    </section>
+
+    <!-- TENTANG AKU -->
+    <section>
+      <h2>Tentang Aku</h2>
+      <div class="about-container">
+        <img src="fotoku.jpg" alt="Foto Haya Farras">
+        <p>
+          Halo, aku Haya Farras. Website ini merupakan bagian dari tugas akademik
+          sekaligus wadah untuk menampilkan minat dan ketertarikanku dalam bidang
+          literasi dan pengelolaan perpustakaan. Aku percaya bahwa perpustakaan
+          bukan hanya tempat menyimpan buku, tetapi juga ruang bertumbuh dan belajar.
+        </p>
+
+        <div class="about-links">
+          <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
+          <a href="https://drive.google.com/drive/folders/1xfyE7vIU5a05aADljtF3Ku4mBBQ_ZjrF?usp=drive_link" target="_blank">Curriculum Vitae</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section>
+      <h2>Video Perkenalan</h2>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+          title="Video Perkenalan"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
+
   </main>
 
-  <!-- FOOTER -->
   <footer>
     © 2026 Perpustakaan Haya Farras
-
-    <div class="footer-more">
-      <h4>More About Us</h4>
-      <div class="footer-links">
-        <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
-        <a href="https://drive.google.com/file/d/1r1lnVzjixANkzNoi87yE_cddTXBTAZDV/view?usp=drive_link" target="_blank">Curriculum Vitae</a>
-      </div>
-    </div>
   </footer>
 
-  <!-- JS -->
   <script>
     window.addEventListener("load", () => {
       setTimeout(() => {

@@ -1,288 +1,222 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Haya Farras</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perpustakaan Haya Farras</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+body{
+font-family:'Poppins',sans-serif;
+background:linear-gradient(180deg,#dbeafe,#ffffff);
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+/* HEADER */
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+padding:15px 40px;
+background:#bfdbfe;
+}
 
-    body {
-      font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #dbeafe, #ffffff);
-      color: #2c2c2c;
-    }
+.logo{
+display:flex;
+align-items:center;
+gap:10px;
+}
 
-    /* INTRO */
-    .intro {
-      position: fixed;
-      inset: 0;
-      background: linear-gradient(180deg, #bfdbfe, #ffffff);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      z-index: 9999;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards, fadeOut 1.5s ease forwards;
-      animation-delay: 0s, 3s;
-    }
+.logo img{
+width:40px;
+}
 
-    @keyframes fadeIn { to { opacity: 1; } }
-    @keyframes fadeOut { to { opacity: 0; visibility: hidden; } }
+nav{
+display:flex;
+gap:20px;
+}
 
-    /* HEADER + NAV */
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background-color: #bfdbfe;
-      padding: 15px 40px;
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
+nav a{
+text-decoration:none;
+font-weight:600;
+color:#1e3a8a;
+cursor:pointer;
+}
 
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
+nav a:hover{
+color:#2563eb;
+}
 
-    .logo img {
-      width: 40px;
-      height: 40px;
-    }
+main{
+max-width:900px;
+margin:50px auto;
+padding:20px;
+text-align:center;
+}
 
-    .logo h1 {
-      font-size: 20px;
-      color: #1e3a8a;
-    }
+/* SECTION CONTROL */
+.page{
+display:none;
+}
 
-    nav {
-      display: flex;
-      gap: 20px;
-      align-items: center;
-    }
+.page.active{
+display:block;
+}
 
-    nav a {
-      text-decoration: none;
-      font-weight: 600;
-      color: #1e3a8a;
-      transition: 0.3s;
-    }
+/* FORM STYLE */
+.form-box{
+background:white;
+padding:30px;
+border-radius:12px;
+box-shadow:0 5px 20px rgba(0,0,0,0.1);
+max-width:400px;
+margin:auto;
+}
 
-    nav a:hover {
-      color: #2563eb;
-    }
+input, textarea{
+width:100%;
+padding:10px;
+margin:10px 0;
+border-radius:8px;
+border:1px solid #ccc;
+}
 
-    .auth-buttons a {
-      background-color: #2563eb;
-      color: white;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 14px;
-    }
+button{
+padding:10px 20px;
+background:#2563eb;
+color:white;
+border:none;
+border-radius:20px;
+cursor:pointer;
+}
 
-    .auth-buttons a:hover {
-      background-color: #1e3a8a;
-    }
+button:hover{
+background:#1e3a8a;
+}
 
-    main {
-      max-width: 900px;
-      margin: 80px auto 40px;
-      padding: 20px;
-      text-align: center;
-    }
+.link{
+margin-top:10px;
+font-size:14px;
+}
 
-    section {
-      margin-bottom: 40px;
-    }
+.section-divider{
+width:60%;
+height:2px;
+margin:40px auto;
+background:linear-gradient(to right,transparent,#93c5fd,transparent);
+}
 
-    h2 {
-      margin-bottom: 20px;
-      color: #1e3a8a;
-    }
+.profile-img{
+width:180px;
+height:180px;
+border-radius:50%;
+object-fit:cover;
+}
 
-    p {
-      line-height: 1.7;
-      color: #4b5563;
-    }
-
-    .section-divider {
-      width: 60%;
-      height: 2px;
-      margin: 40px auto;
-      background: linear-gradient(to right, transparent, #93c5fd, transparent);
-    }
-
-    /* ABOUT */
-    .about-container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 20px;
-    }
-
-    .profile-img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .about-links a {
-      text-decoration: none;
-      background-color: #93c5fd;
-      color: #1e3a8a;
-      padding: 8px 18px;
-      border-radius: 20px;
-      margin: 5px;
-      display: inline-block;
-    }
-
-    .about-links a:hover {
-      background-color: #1e3a8a;
-      color: white;
-    }
-
-    /* VIDEO */
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
-      border-radius: 12px;
-    }
-
-    /* CONTACT FORM */
-    .contact-form {
-      max-width: 500px;
-      margin: auto;
-      text-align: left;
-    }
-
-    .contact-form input,
-    .contact-form textarea {
-      width: 100%;
-      padding: 10px;
-      margin-bottom: 15px;
-      border-radius: 8px;
-      border: 1px solid #ccc;
-      font-family: 'Poppins', sans-serif;
-    }
-
-    .contact-form button {
-      background-color: #2563eb;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 20px;
-      cursor: pointer;
-    }
-
-    .contact-form button:hover {
-      background-color: #1e3a8a;
-    }
-
-    footer {
-      background-color: #93c5fd;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
-      color: #1e3a8a;
-    }
-  </style>
+footer{
+text-align:center;
+padding:20px;
+background:#93c5fd;
+margin-top:50px;
+}
+</style>
 </head>
 
 <body>
 
-  <!-- INTRO -->
-  <div class="intro">
-    <h1>Selamat Datang ✨</h1>
-    <h2>Perpustakaan Haya Farras</h2>
-  </div>
+<header>
+<div class="logo">
+<img src="logo.png">
+<h3>Perpustakaan Haya Farras</h3>
+</div>
 
-  <!-- HEADER -->
-  <header>
-    <div class="logo">
-      <img src="logo.png" alt="Logo">
-      <h1>Perpustakaan Haya Farras</h1>
-    </div>
+<nav>
+<a onclick="showPage('beranda')">Beranda</a>
+<a onclick="showPage('koleksi')">Koleksi</a>
+<a onclick="showPage('kontak')">Kontak</a>
+<a onclick="showPage('login')">Login</a>
+<a onclick="showPage('register')">Register</a>
+</nav>
+</header>
 
-    <nav>
-      <a href="#">Home</a>
-      <a href="#">Koleksi</a>
-      <a href="#contact">Contact</a>
-      <div class="auth-buttons">
-        <a href="#">Login</a>
-        <a href="#">Register</a>
-      </div>
-    </nav>
-  </header>
+<main>
 
-  <main>
+<!-- BERANDA -->
+<div id="beranda" class="page active">
+<h2>Tentang Website Ini</h2>
+<p>Website perpustakaan pribadi untuk menampilkan koleksi dan literasi.</p>
 
-    <section>
-      <h2>Tentang Website Ini</h2>
-      <p>
-        Website ini dibuat sebagai proyek pembuatan website perpustakaan pribadi
-        yang bertujuan menampilkan koleksi buku dan informasi literasi.
-      </p>
-    </section>
+<div class="section-divider"></div>
 
-    <div class="section-divider"></div>
+<h2>Tentang Aku</h2>
+<img src="fotoku.jpg" class="profile-img">
+<p>Halo, aku Haya Farras ✨</p>
+</div>
 
-    <section>
-      <h2>Tentang Aku</h2>
-      <div class="about-container">
-        <img src="foto.jpg" alt="Foto Haya Farras" class="profile-img">
-        <p>
-          Halo, aku Haya Farras. Website ini adalah bagian dari tugas akademik
-          sekaligus wadah untuk menampilkan minatku dalam bidang literasi.
-        </p>
-        <div class="about-links">
-          <a href="#">Instagram</a>
-          <a href="#">Curriculum Vitae</a>
-        </div>
-      </div>
-    </section>
+<!-- KOLEKSI -->
+<div id="koleksi" class="page">
+<h2>Koleksi Buku</h2>
+<p>Daftar koleksi buku akan ditampilkan di sini.</p>
+</div>
 
-    <div class="section-divider"></div>
+<!-- LOGIN -->
+<div id="login" class="page">
+<div class="form-box">
+<h2>Login</h2>
+<form>
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Password" required>
+<button type="submit">Login</button>
+</form>
+<div class="link">
+Belum punya akun? 
+<a onclick="showPage('register')" style="color:#2563eb;cursor:pointer;">Register di sini</a>
+</div>
+</div>
+</div>
 
-    <section>
-      <h2>Video Dokumentasi</h2>
-      <iframe src="https://www.youtube.com/embed/4w13jP-cshM"
-        allowfullscreen></iframe>
-    </section>
+<!-- REGISTER -->
+<div id="register" class="page">
+<div class="form-box">
+<h2>Register</h2>
+<form>
+<input type="text" placeholder="Nama Lengkap" required>
+<input type="email" placeholder="Email" required>
+<input type="password" placeholder="Password" required>
+<button type="submit">Daftar</button>
+</form>
+<div class="link">
+Sudah punya akun? 
+<a onclick="showPage('login')" style="color:#2563eb;cursor:pointer;">Login di sini</a>
+</div>
+</div>
+</div>
 
-    <div class="section-divider"></div>
+<!-- KONTAK -->
+<div id="kontak" class="page">
+<div class="form-box">
+<h2>Contact Us</h2>
+<form>
+<input type="text" placeholder="Nama">
+<input type="email" placeholder="Email">
+<textarea rows="5" placeholder="Tulis pesan atau feedback..."></textarea>
+<button type="submit">Kirim</button>
+</form>
+</div>
+</div>
 
-    <!-- CONTACT US -->
-    <section id="contact">
-      <h2>Contact Us</h2>
-      <div class="contact-form">
-        <form>
-          <input type="text" placeholder="Nama Anda" required>
-          <input type="email" placeholder="Email Anda" required>
-          <textarea rows="5" placeholder="Tulis pesan atau feedback Anda..." required></textarea>
-          <button type="submit">Kirim Pesan</button>
-        </form>
-      </div>
-    </section>
+</main>
 
-  </main>
+<footer>© 2026 Perpustakaan Haya Farras</footer>
 
-  <footer>
-    © 2026 Perpustakaan Haya Farras
-  </footer>
+<script>
+function showPage(pageId){
+let pages=document.querySelectorAll('.page');
+pages.forEach(page=>page.classList.remove('active'));
+document.getElementById(pageId).classList.add('active');
+}
+</script>
 
 </body>
 </html>

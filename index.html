@@ -1,344 +1,268 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perpustakaan Haya Farras</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Perpustakaan Haya Farras</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
-<style>
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body {
-  min-height: 100vh;
-  font-family: 'Poppins', sans-serif;
-  background: linear-gradient(180deg, #dbeafe, #ffffff);
-  color: #2c2c2c;
-}
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #dbeafe, #ffffff);
+      color: #2c2c2c;
+    }
 
-/* INTRO */
-.intro {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(180deg, #bfdbfe, #ffffff);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  z-index: 9999;
-  opacity: 0;
-  animation: fadeIn 1.5s ease forwards, fadeOut 1.5s ease forwards;
-  animation-delay: 0s, 3s;
-}
+    /* INTRO */
+    .intro {
+      position: fixed;
+      inset: 0;
+      background: linear-gradient(180deg, #bfdbfe, #ffffff);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      opacity: 0;
+      animation: fadeIn 1.5s ease forwards, fadeOut 1.5s ease forwards;
+      animation-delay: 0s, 3s;
+    }
 
-.intro h1 {
-  font-size: 48px;
-  color: #1e3a8a;
-  animation: slideUp 1.5s ease;
-}
+    .intro h1 {
+      font-size: 48px;
+      color: #1e3a8a;
+      animation: slideUp 1.5s ease;
+    }
 
-.intro h2 {
-  margin-top: 10px;
-  font-size: 20px;
-  color: #2563eb;
-  animation: slideUp 2s ease;
-}
+    .intro h2 {
+      margin-top: 10px;
+      font-size: 20px;
+      color: #2563eb;
+      animation: slideUp 2s ease;
+    }
 
-@keyframes fadeIn {
-  to { opacity: 1; }
-}
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
 
-@keyframes fadeOut {
-  to { opacity: 0; visibility: hidden; }
-}
+    @keyframes fadeOut {
+      to { opacity: 0; visibility: hidden; }
+    }
 
-@keyframes slideUp {
-  from { transform: translateY(20px); opacity: 0; }
-  to { transform: translateY(0); opacity: 1; }
-}
+    @keyframes slideUp {
+      from { transform: translateY(20px); opacity: 0; }
+      to { transform: translateY(0); opacity: 1; }
+    }
 
-/* HEADER */
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #bfdbfe;
-  padding: 15px 40px;
-}
+    header {
+      background-color: #bfdbfe;
+      padding: 24px 32px;
+    }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+    header h1 {
+      font-size: 26px;
+      color: #1e3a8a;
+    }
 
-.logo img {
-  width: 40px;
-  height: 40px;
-}
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 32px;
+      display: flex;
+      gap: 20px;
+      background: rgba(255,255,255,0.85);
+      padding: 10px 18px;
+      border-radius: 20px;
+      backdrop-filter: blur(6px);
+    }
 
-nav {
-  display: flex;
-  gap: 20px;
-  align-items: center;
-}
+    nav a {
+      text-decoration: none;
+      font-weight: 600;
+      color: #2563eb;
+    }
 
-nav a {
-  text-decoration: none;
-  font-weight: 600;
-  color: #1e3a8a;
-  cursor: pointer;
-}
+    nav a:hover {
+      text-decoration: underline;
+    }
 
-nav a:hover {
-  color: #2563eb;
-}
+    main {
+      flex: 1;
+      max-width: 900px;
+      margin: 140px auto 40px;
+      padding: 20px;
+    }
 
-/* MAIN */
-main {
-  max-width: 900px;
-  margin: 100px auto 40px;
-  padding: 20px;
-  text-align: center;
-}
+    section {
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-/* SECTION CONTROL */
-.section {
-  display: none;
-}
+    section h2 {
+      font-size: 28px;
+      margin-bottom: 20px;
+      color: #1e3a8a;
+    }
 
-.section.active {
-  display: block;
-}
+    section p {
+      font-size: 17px;
+      line-height: 1.7;
+      color: #4b5563;
+    }
 
-.section-divider {
-  width: 60%;
-  height: 2px;
-  margin: 50px auto;
-  background: linear-gradient(to right, transparent, #93c5fd, transparent);
-  border-radius: 2px;
-}
+    /* PEMISAH */
+    .section-divider {
+      width: 60%;
+      height: 2px;
+      margin: 50px auto;
+      background: linear-gradient(to right, transparent, #93c5fd, transparent);
+      border-radius: 2px;
+    }
 
-.profile-img {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-}
+    /* ABOUT */
+    .about-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
 
-/* ABOUT LINKS */
-.about-links {
-  margin-top: 15px;
-  display: flex;
-  justify-content: center;
-  gap: 15px;
-  flex-wrap: wrap;
-}
+    .about-container img {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      object-fit: cover;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
 
-.about-links a {
-  text-decoration: none;
-  background-color: #93c5fd;
-  color: #1e3a8a;
-  padding: 8px 18px;
-  border-radius: 20px;
-  font-weight: 500;
-  transition: 0.3s;
-}
+    .about-links {
+      margin-top: 15px;
+      display: flex;
+      justify-content: center;
+      gap: 15px;
+      flex-wrap: wrap;
+    }
 
-.about-links a:hover {
-  background-color: #1e3a8a;
-  color: white;
-}
+    .about-links a {
+      text-decoration: none;
+      background-color: #93c5fd;
+      color: #1e3a8a;
+      padding: 8px 18px;
+      border-radius: 20px;
+      font-weight: 500;
+      transition: 0.3s;
+    }
 
-/* VIDEO */
-.video-container {
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-}
+    .about-links a:hover {
+      background-color: #1e3a8a;
+      color: white;
+    }
 
-iframe {
-  width: 100%;
-  max-width: 560px;
-  height: 315px;
-  border-radius: 12px;
-}
+    /* VIDEO */
+    .video-container {
+      margin-top: 20px;
+      display: flex;
+      justify-content: center;
+    }
 
-/* FORM STYLE */
-.form-box {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-  max-width: 400px;
-  margin: 40px auto;
-}
+    iframe {
+      width: 100%;
+      max-width: 560px;
+      height: 315px;
+      border-radius: 12px;
+    }
 
-.form-box input,
-.form-box textarea {
-  width: 100%;
-  padding: 10px;
-  margin: 10px 0;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-}
-
-.form-box button {
-  background: #2563eb;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 20px;
-  cursor: pointer;
-}
-
-.form-box button:hover {
-  background: #1e3a8a;
-}
-
-.switch span {
-  color: #2563eb;
-  cursor: pointer;
-  font-weight: 600;
-}
-
-/* FOOTER */
-footer {
-  background-color: #93c5fd;
-  text-align: center;
-  padding: 20px;
-  font-size: 14px;
-  color: #1e3a8a;
-}
-</style>
+    footer {
+      background-color: #93c5fd;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      color: #1e3a8a;
+    }
+  </style>
 </head>
 
 <body>
 
-<!-- INTRO -->
-<div class="intro">
-  <h1>Selamat Datang ✨</h1>
-  <h2>Perpustakaan Haya Farras</h2>
-</div>
-
-<header>
-  <div class="logo">
-    <img src="logo.png" alt="Logo">
-    <h3>Perpustakaan Haya Farras</h3>
+  <!-- INTRO -->
+  <div class="intro">
+    <h1>Selamat Datang ✨</h1>
   </div>
 
+  <!-- HEADER -->
+  <header>
+    <h1>Perpustakaan Haya Farras</h1>
+  </header>
+
+  <!-- NAV -->
   <nav>
-    <a onclick="showSection('home')">Beranda</a>
-    <a onclick="showSection('koleksi')">Koleksi</a>
-    <a onclick="showSection('kontak')">Kontak</a>
-    <a onclick="showSection('login')">Login</a>
-    <a onclick="showSection('register')">Register</a>
+    <a href="index.html">Beranda</a>
+    <a href="koleksi.html">Koleksi</a>
+    <a href="kontak.html">Kontak</a>
+    <a href="masuk/daftar.html">Masuk/Daftar</a>
   </nav>
-</header>
 
-<main>
+  <!-- MAIN -->
+  <main>
 
-<!-- ================= BERANDA ================= -->
-<div id="home" class="section active">
+    <section>
+      <h2>Tentang Website Ini</h2>
+      <p>
+        Website ini dibuat sebagai proyek pembuatan website perpustakaan pribadi.
+        Tujuannya adalah untuk menyediakan ruang digital yang menampilkan koleksi buku,
+        informasi literasi, serta sebagai sarana pengembangan kemampuan dalam
+        pengelolaan informasi dan teknologi web.
+      </p>
+    </section>
 
-  <h2>Tentang Website Ini</h2>
-  <p>
-    Website ini dibuat sebagai proyek pembuatan website perpustakaan pribadi.
-    Tujuannya adalah untuk menyediakan ruang digital yang menampilkan koleksi buku,
-    informasi literasi, serta sebagai sarana pengembangan kemampuan dalam
-    pengelolaan informasi dan teknologi web.
-  </p>
+    <div class="section-divider"></div>
 
-  <div class="section-divider"></div>
+    <section>
+      <h2>Tentang Aku</h2>
+      <div class="about-container">
+        <img src="foto.jpg" alt="Foto Haya Farras" class="profile-img">
+        <p>
+          Halo, aku Haya Farras. Website ini merupakan bagian dari tugas akademik
+          sekaligus wadah untuk menampilkan minat dan ketertarikanku dalam bidang
+          literasi dan pengelolaan perpustakaan.
+        </p>
 
-  <h2>Tentang Aku</h2>
-  <img src="foto.jpg" alt="Foto Haya Farras" class="profile-img">
-  <p>
-    Halo, aku Haya Farras. Website ini merupakan bagian dari tugas akademik
-    sekaligus wadah untuk menampilkan minat dan ketertarikanku dalam bidang
-    literasi dan pengelolaan perpustakaan.
-  </p>
+        <div class="about-links">
+          <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
+          <a href="https://drive.google.com/drive/folders/1xfyE7vIU5a05aADljtF3Ku4mBBQ_ZjrF?usp=drive_link" target="_blank">Curriculum Vitae</a>
+        </div>
+      </div>
+    </section>
 
-  <div class="about-links">
-    <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
-    <a href="https://drive.google.com/file/d/1r1lnVzjixANkzNoi87yE_cddTXBTAZDV/view?usp=drive_link" target="_blank">Curriculum Vitae</a>
-  </div>
+    <div class="section-divider"></div>
 
-  <div class="section-divider"></div>
+    <section>
+      <h2>Video Dokumentasi Pengabdian kepada Masyarakat</h2>
+      <div class="video-container">
+        <iframe 
+          src="https://www.youtube.com/embed/4w13jP-cshM"
+          title="Video Dokumentasi Pengabdian kepada Masyarakat"
+          frameborder="0"
+          allowfullscreen>
+        </iframe>
+      </div>
+    </section>
 
-  <h2>Video Dokumentasi Pengabdian kepada Masyarakat</h2>
-  <div class="video-container">
-    <iframe 
-      src="https://www.youtube.com/embed/4w13jP-cshM"
-      allowfullscreen>
-    </iframe>
-  </div>
+  </main>
 
-</div>
-
-<!-- ================= KOLEKSI ================= -->
-<div id="koleksi" class="section">
-  <h2>Koleksi Buku</h2>
-  <p>Daftar koleksi buku akan ditampilkan di sini.</p>
-</div>
-
-<!-- ================= LOGIN ================= -->
-<div id="login" class="section">
-  <div class="form-box">
-    <h2>Login</h2>
-    <form>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Login</button>
-    </form>
-  </div>
-</div>
-
-<!-- ================= REGISTER ================= -->
-<div id="register" class="section">
-  <div class="form-box">
-    <h2>Register</h2>
-    <form>
-      <input type="text" placeholder="Nama Lengkap" required>
-      <input type="email" placeholder="Email" required>
-      <input type="password" placeholder="Password" required>
-      <button type="submit">Daftar</button>
-    </form>
-  </div>
-</div>
-
-<!-- ================= KONTAK ================= -->
-<div id="kontak" class="section">
-  <div class="form-box">
-    <h2>Contact Us</h2>
-    <form>
-      <input type="text" placeholder="Nama">
-      <input type="email" placeholder="Email">
-      <textarea rows="5" placeholder="Tulis pesan atau feedback..."></textarea>
-      <button type="submit">Kirim</button>
-    </form>
-  </div>
-</div>
-
-</main>
-
-<footer>
-  © 2026 Perpustakaan Haya Farras
-</footer>
-
-<script>
-function showSection(id){
-  let sections = document.querySelectorAll('.section');
-  sections.forEach(sec => sec.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-</script>
+  <footer>
+    © 2026 Perpustakaan Haya Farras
+  </footer>
 
 </body>
 </html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Layanan - Perpustakaan Lentera Publika</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f0f7ff, #ffffff);
+      color: #2c2c2c;
+    }
+
+    /* HEADER */
+    header {
+      background-color: #1e3a8a;
+      padding: 20px 5%;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+
+    .logo {
+      width: 45px;
+      height: 45px;
+      object-fit: contain;
+      filter: brightness(0) invert(1); 
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* NAVIGASI */
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #bfdbfe;
+      font-size: 14px;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    nav a:hover {
+      color: white;
+      background: rgba(255,255,255,0.1);
+    }
+
+    nav a.active {
+      color: white;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    section {
+      margin-bottom: 60px;
+    }
+
+    .section-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      color: #1e3a8a;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: #dbeafe;
+    }
+
+    .content-card {
+      background: white;
+      padding: 40px;
+      border-radius: 20px;
+      line-height: 1.8;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    }
+
+    .content-card h3 {
+      color: #1e3a8a;
+      margin-top: 25px;
+      margin-bottom: 10px;
+      font-size: 20px;
+    }
+
+    .content-card h3:first-child {
+      margin-top: 0;
+    }
+
+    .content-card p {
+      color: #4b5563;
+      text-align: justify;
+    }
+
+    /* FASILITAS BOX (Biru Muda) */
+    .facility-box {
+      margin-top: 40px;
+      background: #f0f7ff;
+      padding: 30px;
+      border-radius: 15px;
+    }
+
+    .facility-box h3 {
+      color: #1e3a8a;
+      margin-bottom: 15px;
+    }
+
+    .facility-box ul {
+      list-style-position: inside;
+      color: #4b5563;
+      line-height: 2;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1e3a8a;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-top: auto;
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo-title">
+      <img src="logo.png" alt="Logo" class="logo">
+      <h1>Lentera Publika</h1>
+    </div>
+    <nav>
+      <a href="index.html">Beranda</a>
+      <a href="katalog.html">Katalog</a>
+      <a href="layanan.html" class="active">Layanan</a>
+      <a href="kegiatan.html">Kegiatan</a>
+      <a href="kontak.html">Kontak</a>
+      <a href="masuk/daftar.html">Masuk/Daftar</a>
+    </nav>
+  </header>
+
+ <main>
+  <section>
+    <div class="section-title">
+      <h2>Layanan Perpustakaan Lentera Publika</h2>
+    </div>
+    
+    <div class="content-card">
+      <h3>1. Pendaftaran Anggota Online</h3>
+      <p>Menjadi bagian dari Lentera Publika kini lebih praktis. Masyarakat dapat melakukan pendaftaran anggota secara mandiri melalui website ini. Cukup isi formulir digital, unggah kartu identitas, dan tunggu verifikasi petugas. Setelah disetujui, Anda dapat langsung berkunjung untuk menikmati seluruh layanan kami.</p>
+      
+      <br>
+
+      <h3>2. Layanan Sirkulasi (Pinjam & Kembali)</h3>
+      <p>Untuk menjaga kelestarian koleksi fisik, proses transaksi peminjaman dan pengembalian buku dilakukan secara langsung (manual) di meja layanan. Anda dapat mengecek ketersediaan buku melalui fitur <strong>Katalog</strong> di web ini, lalu datang ke perpustakaan dengan menunjukkan kartu anggota digital Anda kepada petugas.</p>
+      
+      <br>
+
+      <h3>3. Layanan Referensi & Konsultasi</h3>
+      <p>Bagi Anda yang membutuhkan bantuan dalam mencari literatur spesifik atau data riset, Pustakawan kami siap membantu Anda menelusuri rak koleksi secara manual. Kami hadir untuk memastikan setiap pengunjung mendapatkan informasi yang akurat dan kredibel.</p>
+
+      <div class="facility-box" style="margin-top: 40px; background: #f0f7ff; padding: 30px; border-radius: 15px;">
+        <h3 style="color: #1e3a8a; margin-bottom: 15px;">Fasilitas Gedung</h3>
+        <ul style="list-style-position: inside; color: #4b5563; line-height: 2;">
+          <li><strong>Ruang Baca Nyaman:</strong> Area tenang dengan pendingin ruangan (AC) untuk membaca dan belajar.</li>
+          <li><strong>Pojok Digital:</strong> Tersedia unit komputer dan akses Wi-Fi gratis bagi anggota untuk riset online.</li>
+          <li><strong>Akses Koleksi Fisik:</strong> Jelajahi ribuan judul buku dari berbagai kategori ilmu pengetahuan secara langsung.</li>
+          <li><strong>Area Literasi Anak:</strong> Ruang khusus yang ramah anak untuk menumbuhkan minat baca sejak usia dini.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+</main>
+
+  <footer>
+    <p>© 2026 Perpustakaan Lentera Publika</p>
+    <p style="margin-top: 5px; font-weight: 300; opacity: 0.8;">Mewujudkan Masyarakat Literat di Era Digital</p>
+  </footer>
+
+</body>
+</html>

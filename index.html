@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Perpustakaan Haya Farras</title>
+  <title>Perpustakaan Lentera Publika</title>
 
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -19,265 +19,289 @@
       display: flex;
       flex-direction: column;
       font-family: 'Poppins', sans-serif;
-      background: linear-gradient(180deg, #dbeafe, #ffffff);
+      background: linear-gradient(180deg, #f0f7ff, #ffffff);
       color: #2c2c2c;
     }
 
-    /* INTRO */
+    /* TRANSISI INTRO (Efek Tirai) */
     .intro {
       position: fixed;
       inset: 0;
-      background: linear-gradient(180deg, #bfdbfe, #ffffff);
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+      background: #1e3a8a; 
       z-index: 9999;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards, fadeOut 1.5s ease forwards;
-      animation-delay: 0s, 3s;
+      pointer-events: none;
+      animation: fadeOutTransition 1.2s ease-in-out forwards;
+      animation-delay: 0.3s;
     }
 
-    .intro h1 {
-      font-size: 48px;
-      color: #1e3a8a;
-      animation: slideUp 1.5s ease;
-    }
-
-    .intro h2 {
-      margin-top: 10px;
-      font-size: 20px;
-      color: #2563eb;
-      animation: slideUp 2s ease;
-    }
-
-    @keyframes fadeIn {
-      to { opacity: 1; }
-    }
-
-    @keyframes fadeOut {
+    @keyframes fadeOutTransition {
+      from { opacity: 1; }
       to { opacity: 0; visibility: hidden; }
     }
 
-    @keyframes slideUp {
-      from { transform: translateY(20px); opacity: 0; }
-      to { transform: translateY(0); opacity: 1; }
-    }
-
+    /* HEADER */
     header {
-      background-color: #bfdbfe;
-      padding: 24px 32px;
+      background-color: #1e3a8a;
+      padding: 20px 5%;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     }
 
-    header h1 {
-      font-size: 26px;
-      color: #1e3a8a;
-    }
-
-     .logo-title {
+    .logo-title {
       display: flex;
       align-items: center;
       gap: 15px;
     }
 
-     .logo {
-      width: 50px;
-      height: 50px;
+    .logo {
+      width: 45px;
+      height: 45px;
       object-fit: contain;
+      filter: brightness(0) invert(1); 
     }
 
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* NAVIGASI */
     nav {
-      position: fixed;
-      top: 20px;
-      right: 32px;
       display: flex;
-      gap: 20px;
-      background: rgba(255,255,255,0.85);
-      padding: 10px 18px;
-      border-radius: 20px;
-      backdrop-filter: blur(6px);
+      gap: 10px;
     }
 
     nav a {
       text-decoration: none;
-      font-weight: 600;
-      color: #2563eb;
+      font-weight: 500;
+      color: #bfdbfe;
+      font-size: 14px;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 8px;
     }
 
-    nav a:hover {
-      text-decoration: underline;
+    nav a:hover, nav a.active {
+      color: white;
+      background: rgba(255,255,255,0.1);
     }
 
+    /* MAIN CONTENT */
     main {
       flex: 1;
-      max-width: 900px;
-      margin: 140px auto 40px;
-      padding: 20px;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
     }
 
-    section {
-      margin-bottom: 20px;
+    .hero-section {
       text-align: center;
+      padding: 80px 20px;
+      background: white;
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+      margin-bottom: 60px;
     }
 
-    section h2 {
-      font-size: 28px;
-      margin-bottom: 20px;
+    /* UNTUK SELAMAT DATANG */
+    .hero-section h2 {
+      font-size: 56px;
+      font-weight: 700;
       color: #1e3a8a;
+      margin-bottom: 5px;
+      letter-spacing: -1px;
     }
 
-    section p {
-      font-size: 17px;
-      line-height: 1.7;
-      color: #4b5563;
+    .hero-section h3 {
+      font-size: 24px;
+      color: #2563eb;
+      font-weight: 600;
+      margin-bottom: 20px;
     }
 
-    /* PEMISAH */
-    .section-divider {
-      width: 60%;
-      height: 2px;
-      margin: 50px auto;
-      background: linear-gradient(to right, transparent, #93c5fd, transparent);
+    .hero-divider {
+      width: 60px;
+      height: 4px;
+      background: #2563eb;
+      margin: 0 auto 25px;
       border-radius: 2px;
     }
 
-    /* ABOUT */
-    .about-container {
+    .hero-section p {
+      font-size: 18px;
+      color: #4b5563;
+      max-width: 800px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* SECTION STYLING */
+    section {
+      margin-bottom: 60px;
+      padding-top: 20px;
+    }
+
+    .section-title {
       display: flex;
-      flex-direction: column;
       align-items: center;
+      gap: 10px;
+      margin-bottom: 25px;
+      color: #1e3a8a;
+    }
+
+    .section-title::after {
+      content: "";
+      flex: 1;
+      height: 2px;
+      background: #dbeafe;
+    }
+
+    .content-card {
+      background: white;
+      padding: 30px;
+      border-radius: 15px;
+      line-height: 1.8;
+      text-align: justify;
+      box-shadow: 0 4px 6px rgba(0,0,0,0.02);
+    }
+
+    /* FITUR (GRID) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 20px;
-    }
-
-    .about-container img {
-      width: 180px;
-      height: 180px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    }
-
-    .about-links {
-      margin-top: 15px;
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      flex-wrap: wrap;
-    }
-
-    .about-links a {
-      text-decoration: none;
-      background-color: #93c5fd;
-      color: #1e3a8a;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-weight: 500;
-      transition: 0.3s;
-    }
-
-    .about-links a:hover {
-      background-color: #1e3a8a;
-      color: white;
-    }
-
-    /* VIDEO */
-    .video-container {
       margin-top: 20px;
-      display: flex;
-      justify-content: center;
     }
 
-    iframe {
-      width: 100%;
-      max-width: 560px;
-      height: 315px;
+    .feature-item {
+      background: white;
+      padding: 30px;
       border-radius: 12px;
+      border: 1px solid #e2e8f0;
+      text-align: center;
+      transition: transform 0.3s ease;
     }
 
-    footer {
-      background-color: #93c5fd;
-      text-align: center;
-      padding: 20px;
-      font-size: 14px;
+    .feature-item:hover {
+      transform: translateY(-5px);
+      border-color: #bfdbfe;
+    }
+
+    .feature-item h3 {
       color: #1e3a8a;
+      margin-bottom: 15px;
+      font-size: 20px;
+    }
+
+    .feature-item p {
+      font-size: 15px;
+      color: #64748b;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1e3a8a;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-top: auto;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-section h2 {
+        font-size: 38px;
+      }
     }
   </style>
 </head>
 
 <body>
 
-  <!-- INTRO -->
-  <div class="intro">
-    <h1>Selamat Datang ✨</h1>
-  </div>
+  <div class="intro"></div>
 
-  <!-- HEADER -->
-<header>
-  <div class="logo-title">
-    <img src="logo.png" alt="Logo Perpustakaan" class="logo">
-    <h1>Perpustakaan Haya Farras</h1>
-  </div>
-</header>
+  <header>
+    <div class="logo-title">
+      <img src="logo.png" alt="Logo" class="logo">
+      <h1>Lentera Publika</h1>
+    </div>
+    <nav>
+      <a href="index.html" class="active">Beranda</a>
+      <a href="katalog.html">Katalog</a>
+      <a href="layanan.html">Layanan</a>
+      <a href="kegiatan.html">Kegiatan</a>
+      <a href="kontak.html">Kontak</a>
+      <a href="masuk/daftar.html">Masuk/Daftar</a>
+    </nav>
+  </header>
 
-
-  <!-- NAV -->
-  <nav>
-    <a href="index.html">Beranda</a>
-    <a href="koleksi.html">Koleksi</a>
-    <a href="kontak.html">Kontak</a>
-    <a href="masuk/daftar.html">Masuk/Daftar</a>
-  </nav>
-
-  <!-- MAIN -->
   <main>
+    
+    <div class="hero-section">
+      <h2>Selamat Datang</h2>
+      <h3>di Perpustakaan Lentera Publika</h3>
+      <div class="hero-divider"></div>
+      <p>Terangi Dunia dengan Ilmu</p>
+    </div>
 
     <section>
-      <h2>Tentang Website Ini</h2>
-      <p>
-        Website ini dibuat sebagai proyek pembuatan website perpustakaan pribadi.
-        Tujuannya adalah untuk menyediakan ruang digital yang menampilkan koleksi buku,
-        informasi literasi, serta sebagai sarana pengembangan kemampuan dalam
-        pengelolaan informasi dan teknologi web.
-      </p>
-    </section>
-
-    <div class="section-divider"></div>
-
-    <section>
-      <h2>Tentang Aku</h2>
-      <div class="about-container">
-        <img src="foto.jpg" alt="Foto Haya Farras" class="profile-img">
+      <div class="section-title">
+        <h2>Tentang Kami</h2>
+      </div>
+      <div class="content-card">
         <p>
-          Halo, aku Haya Farras. Website ini merupakan bagian dari tugas akademik
-          sekaligus wadah untuk menampilkan minat dan ketertarikanku dalam bidang
-          literasi dan pengelolaan perpustakaan.
+          <strong>Perpustakaan Lentera Publika</strong> hadir sebagai perpustakaan umum pusat sumber informasi dan pengetahuan yang berkomitmen meningkatkan kualitas literasi masyarakat. Di era digital ini, kami bertransformasi dari sistem konvensional menuju layanan berbasis web untuk memberikan akses informasi yang lebih praktis dan transparan.
         </p>
-
-        <div class="about-links">
-          <a href="https://instagram.com/thirahay" target="_blank">Instagram</a>
-          <a href="https://drive.google.com/file/d/1r1lnVzjixANkzNoi87yE_cddTXBTAZDV/view?usp=sharing" target="_blank">Curriculum Vitae</a>
-        </div>
+        <br>
+        <p>
+          Website ini dirancang khusus agar masyarakat dapat mengetahui ketersediaan koleksi dan layanan kami tanpa harus datang langsung ke lokasi fisik. Melalui portal ini, Anda dapat menjelajahi <strong>katalog koleksi buku</strong>, mendapatkan <strong>informasi layanan</strong>, memantau <strong>jadwal kegiatan literasi</strong>, hingga berkonsultasi langsung dengan <strong>pustakawan kami</strong>. Kami hadir untuk memastikan bahwa setiap langkah pencarian ilmu Anda menjadi lebih efektif dan efisien.
+        </p>
       </div>
     </section>
 
-    <div class="section-divider"></div>
-
     <section>
-      <h2>Video Dokumentasi Pengabdian kepada Masyarakat</h2>
-      <div class="video-container">
-        <iframe 
-          src="https://www.youtube.com/embed/4w13jP-cshM"
-          title="Video Dokumentasi Pengabdian kepada Masyarakat"
-          frameborder="0"
-          allowfullscreen>
-        </iframe>
+      <div class="section-title">
+        <h2>Layanan</h2>
+      </div>
+      <div class="features-grid">
+        <div class="feature-item">
+          <h3>Pencarian Katalog</h3>
+          <p>Cek ketersediaan buku favorit Anda secara online sebelum berkunjung ke perpustakaan fisik.</p>
+        </div>
+        
+        <div class="feature-item">
+          <h3>Informasi Kegiatan</h3>
+          <p>Dapatkan update terbaru mengenai jadwal workshop, kegiatan literasi, dan program edukatif kami.</p>
+        </div>
+        
+        <div class="feature-item">
+          <h3>Tanya Pustakawan</h3>
+          <p>Hubungi petugas kami secara langsung untuk bantuan referensi, informasi keanggotaan, atau layanan lainnya.</p>
+        </div>
       </div>
     </section>
 
   </main>
 
   <footer>
-    © 2026 Perpustakaan Haya Farras
+    <p>© 2026 Perpustakaan Lentera Publika</p>
+    <p style="margin-top: 5px; font-weight: 300; opacity: 0.8;">Mewujudkan Masyarakat Literat di Era Digital</p>
   </footer>
 
 </body>

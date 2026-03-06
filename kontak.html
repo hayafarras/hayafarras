@@ -283,7 +283,7 @@
         text-align: center; 
       }
       .admin-links { 
-        ustify-content: center; 
+        justify-content: center; 
       }
       .admin-photo { 
         width: 120px; 
@@ -305,6 +305,10 @@
     <div class="container">
     <div class="section-title"><h2>Hubungi Kami</h2></div>
 
+    <p style="margin-bottom: 30px; color: #4b5563; line-height: 1.6;">
+      Punya pertanyaan seputar koleksi buku atau butuh bantuan teknis? Hubungi petugas kami secara langsung untuk bantuan referensi, informasi keanggotaan, atau layanan lainnya melalui formulir di bawah ini atau kontak WhatsApp resmi kami.
+    </p>
+
     <div class="contact-grid">
       <div class="contact-card">
         <h3>Informasi Kontak</h3>
@@ -312,7 +316,7 @@
         <p style="margin-bottom: 20px;"><strong>Ask Librarian:</strong> +62 812-3456-7890 (WhatsApp)</p>
         
         <div style="background: #f0f7ff; padding: 15px; border-radius: 10px;">
-          <p style="font-size: 14px; color: #1e3a8a;"><strong>Jam Layanan:</strong><br>Senin - Jumat: 08.00 - 16.00 WIB</p>
+          <p style="font-size: 14px; color: #1e3a8a;"><strong>Jam Layanan:</strong><br>Senin - Sabtu: 08.00 - 16.00 WIB</p>
         </div>
       </div>
 
@@ -320,10 +324,13 @@
         <h3>Kirim Pesan</h3>
         <form>
           <div class="form-group">
-            <label>Kategori</label>
+            <label>Kategori Keperluan</label>
             <select>
               <option>Pertanyaan Umum</option>
-              <option>Laporan Masalah IT</option>
+              <option>Informasi Keanggotaan</option>
+              <option>Bantuan Referensi & Pencarian Buku</option>
+              <option>Layanan Literasi & Kegiatan</option>
+              <option>Laporan Masalah IT / Akses Web</option>
               <option>Saran & Kritik</option>
             </select>
           </div>
@@ -332,6 +339,9 @@
           </div>
           <div class="form-group">
             <input type="email" placeholder="Email Anda" required>
+          </div>
+          <div class="form-group">
+            <input type="WhatsApp" placeholder="Nomor WhatsApp Anda" required>
           </div>
           <div class="form-group">
             <textarea rows="4" placeholder="Tuliskan pesan atau laporan Anda di sini..."></textarea>
@@ -362,4 +372,3 @@
 
 </body>
 </html>
-

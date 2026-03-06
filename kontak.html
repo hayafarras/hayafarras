@@ -108,7 +108,7 @@
       flex: 1;
       width: 100%;
       position: relative;
-      overflow: hidden;
+      overflow-x: hidden;
     }
 
     .container {
@@ -142,7 +142,7 @@
 
     .contact-card {
       background: white;
-      padding: 25%;
+      padding: 30px;
       border-radius: 15px; 
       box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
@@ -206,11 +206,11 @@
 
     .admin-photo {
       width: 150px; 
-      height: 150px; 
+      height: 150px;
+      flex-shrink: 0;
       border-radius: 50%; 
       border: 5px solid rgba(255,255,255,0.2);
       object-fit: cover; 
-      background: #eee;
     }
 
     .admin-info h3 { 
@@ -266,6 +266,28 @@
       }
       .hero-section h2 {
         font-size: 38px;
+      }
+      .container { 
+        margin: 20px auto;
+      }
+      .contact-grid {
+        grid-template-columns: 1fr; /* Form jadi satu kolom di HP */
+        gap: 20px;
+      }
+      .admin-section {
+        flex-direction: column; /* Foto di atas, teks di bawah */
+        text-align: center;
+        padding: 30px 20px;
+      }
+      .admin-info p { 
+        text-align: center; 
+      }
+      .admin-links { 
+        ustify-content: center; 
+      }
+      .admin-photo { 
+        width: 120px; 
+        height: 120px; 
       }
     }
   </style>

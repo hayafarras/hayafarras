@@ -185,6 +185,12 @@
       margin-top: 20px;
     }
 
+    .feature-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+    }
+
     .feature-item {
       background: white;
       padding: 30px;
@@ -192,6 +198,7 @@
       border: 1px solid #e2e8f0;
       text-align: center;
       transition: transform 0.3s ease;
+      cursor: pointer;
     }
 
     .feature-item:hover {
@@ -274,20 +281,26 @@
         <h2>Layanan</h2>
       </div>
       <div class="features-grid">
-        <div class="feature-item">
-          <h3>Pencarian Katalog</h3>
-          <p>Cek ketersediaan buku favorit Anda secara online sebelum berkunjung ke perpustakaan fisik.</p>
-        </div>
+        <a href="katalog.html" class="feature-link">
+          <div class="feature-item">
+            <h3>Pencarian Katalog</h3>
+            <p>Cek ketersediaan buku favorit Anda secara online sebelum berkunjung ke perpustakaan fisik.</p>
+          </div>
+        </a>
         
-        <div class="feature-item">
-          <h3>Informasi Kegiatan</h3>
-          <p>Dapatkan update terbaru mengenai jadwal workshop, kegiatan literasi, dan program edukatif kami.</p>
-        </div>
+        <a href="kegiatan.html" class="feature-link">
+          <div class="feature-item">
+            <h3>Informasi Kegiatan</h3>
+            <p>Dapatkan update terbaru mengenai jadwal workshop, kegiatan literasi, dan program edukatif kami.</p>
+          </div>
+        </a>
         
-        <div class="feature-item">
-          <h3>Tanya Pustakawan</h3>
-          <p>Hubungi petugas kami secara langsung untuk bantuan referensi, informasi keanggotaan, atau layanan lainnya.</p>
-        </div>
+        <a href="kontak.html" class="feature-link">
+          <div class="feature-item">
+            <h3>Tanya Pustakawan</h3>
+            <p>Hubungi petugas kami secara langsung untuk bantuan referensi, informasi keanggotaan, atau layanan lainnya.</p>
+          </div>
+        </a>
       </div>
     </section>
 

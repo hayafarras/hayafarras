@@ -25,13 +25,13 @@
 
     /* --- TAMBAHAN TRANSISI INTRO (Sama dengan Beranda) --- */
     .intro {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      background: #1e3a8a; 
-      z-index: 9999;
+      background: #f0f7ff; 
+      z-index: 10;
       pointer-events: none;
-      animation: fadeOutTransition 1.2s ease-in-out forwards;
-      animation-delay: 0.3s;
+      animation: fadeOutTransition 0.8s ease-in-out forwards;
+      animation-delay: 0.1s;
     }
 
     @keyframes fadeOutTransition {
@@ -177,7 +177,7 @@
       color: #bfdbfe;
       margin-top: auto;
     }
-    
+
     /* RESPONSIVE */
     @media (max-width: 768px) {
       header {
@@ -198,11 +198,13 @@
 
 <body>
 
-  <div class="intro"></div>
 
   <header></header>
 
  <main>
+  <main style="position: relative; overflow: hidden;">
+  <div class="intro"></div>
+  
   <section>
     <div class="section-title">
       <h2>Layanan Perpustakaan Lentera Publika</h2>

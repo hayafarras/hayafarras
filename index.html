@@ -23,15 +23,15 @@
       color: #2c2c2c;
     }
 
-    /* TRANSISI INTRO (Efek Tirai) */
+    /* TRANSISI INTRO */
     .intro {
-      position: fixed;
+      position: absolute;
       inset: 0;
-      background: #1e3a8a; 
-      z-index: 9999;
+      background: #f0f7ff; 
+      z-index: 10;
       pointer-events: none;
-      animation: fadeOutTransition 1.2s ease-in-out forwards;
-      animation-delay: 0.3s;
+      animation: fadeOutTransition 0.8s ease-in-out forwards;
+      animation-delay: 0.2s;
     }
 
     @keyframes fadeOutTransition {
@@ -234,11 +234,12 @@
 
 <body>
 
-  <div class="intro"></div>
 
   <header></header>
 
   <main>
+    <main style="position: relative; overflow: hidden;">
+    <div class="intro"></div>
     
     <div class="hero-section">
       <h2>Selamat Datang</h2>

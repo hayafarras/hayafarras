@@ -28,10 +28,10 @@
       position: absolute;
       inset: 0;
       background: #f0f7ff; 
-      z-index: 9999;
+      z-index: 100;
       pointer-events: none;
-      animation: fadeOutTransition 0.8s ease-in-out forwards;
-      animation-delay: 0.1s;
+      animation: fadeOutTransition 1.0s ease-in-out forwards;
+      animation-delay: 0.2s;
     }
 
     @keyframes fadeOutTransition {
@@ -52,6 +52,12 @@
       top: 0;
       z-index: 900;
       box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
     }
 
     .logo-title {
@@ -243,4 +249,3 @@
 
 </body>
 </html>
-

@@ -177,7 +177,22 @@
       color: #bfdbfe;
       margin-top: auto;
     }
-
+    
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .hero-section h2 {
+        font-size: 38px;
+      }
+    }
   </style>
 </head>
 

@@ -33,3 +33,25 @@ document.addEventListener("DOMContentLoaded", function() {
     const activeLink = document.getElementById("link-" + path.split(".")[0]);
     if(activeLink) activeLink.classList.add("active");
 });
+
+// Fungsi ini ditaruh di luar DOMContentLoaded agar bisa diakses oleh atribut onclick di HTML
+function switchTab(type) {
+    const loginForm = document.getElementById('login-form');
+    const regForm = document.getElementById('register-form');
+    const tabs = document.querySelectorAll('.tab');
+
+    // Cek dulu apakah elemennya ada (supaya tidak error di halaman lain yang tidak ada form loginnya)
+    if (!loginForm || !regForm) return;
+
+    if (type === 'login') {
+        loginForm.style.display = 'block';
+        regForm.style.display = 'none';
+        tabs[0].classList.add('active');
+        tabs[1].classList.remove('active');
+    } else {
+        loginForm.style.display = 'none';
+        regForm.style.display = 'block';
+        tabs[0].classList.remove('active');
+        tabs[1].classList.add('active');
+    }
+}

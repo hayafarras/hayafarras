@@ -102,7 +102,7 @@ function updatePlaceholder() {
         inputNo.setAttribute('pattern', '[0-9]{16}');
         inputNo.title = "NIK harus berjumlah 16 digit angka";
     } else if (jenis === 'kitas') {
-        inputNo.placeholder = "Masukkan KITAS 11 digit";
+        inputNo.placeholder = "Masukkan No KITAS 11 digit";
         inputNo.setAttribute('maxlength', '11');
         inputNo.setAttribute('minlength', '11');
         inputNo.setAttribute('pattern', '[a-zA-Z0-9]{11}');
@@ -162,3 +162,4 @@ function validatePassword() {
 // Jalankan fungsi setiap kali user mengetik di kedua field tersebut
 newPass.onchange = validatePassword;
 confirmPass.onkeyup = validatePassword;
+

@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
-    // TEMPLATE HEADER (BINGKAI ATAS)
+    // 1. TEMPLATE HEADER (BINGKAI ATAS)
     const headerHTML = `
         <div class="logo-title">
           <img src="logo.png" alt="Logo" class="logo">
@@ -15,24 +15,25 @@ document.addEventListener("DOMContentLoaded", function() {
         </nav>
     `;
 
-    // TEMPLATE FOOTER (BINGKAI BAWAH)
+    // 2. TEMPLATE FOOTER (BINGKAI BAWAH)
     const footerHTML = `
         <p>© 2026 Perpustakaan Lentera Publika</p>
         <p style="margin-top: 5px; font-weight: 300; opacity: 0.8;">Mewujudkan Masyarakat Literat di Era Digital</p>
     `;
 
-    // PASANG KE HTML
+    // 3. PASANG KE HTML
     const headerElement = document.querySelector("header");
     const footerElement = document.querySelector("footer");
 
     if(headerElement) headerElement.innerHTML = headerHTML;
     if(footerElement) footerElement.innerHTML = footerHTML;
 
-    // OTOMATIS BIKIN MENU JADI PUTIH (ACTIVE)
+    // 4. OTOMATIS BIKIN MENU JADI PUTIH (ACTIVE)
     const path = window.location.pathname.split("/").pop() || "index.html";
     const activeLink = document.getElementById("link-" + path.split(".")[0]);
     if(activeLink) activeLink.classList.add("active");
 
+    // --- BAGIAN YANG TADI ERROR DI SINI ---
     const regFormElement = document.querySelector("#register-form form");
     if (regFormElement) {
         regFormElement.addEventListener("submit", function(e) {
@@ -40,10 +41,12 @@ document.addEventListener("DOMContentLoaded", function() {
             const confirm = document.getElementById("confirmPass").value;
 
             if (pass !== confirm) {
-                e.preventDefault(); // Menghentikan form agar tidak submit
+                e.preventDefault(); 
                 alert("Kata sandi konfirmasi tidak cocok!");
             }
-});
+        }); // <-- Pastikan ada penutup ini
+    } // <-- Dan penutup ini
+}); // <-- Penutup DOMContentLoaded
 
 // Fungsi ini ditaruh di luar DOMContentLoaded agar bisa diakses oleh atribut onclick di HTML
 function switchTab(type) {

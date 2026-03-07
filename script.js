@@ -55,3 +55,14 @@ function switchTab(type) {
         tabs[1].classList.add('active');
     }
 }
+
+function toggleVisibility(id) {
+    const input = document.getElementById(id);
+    if (input.type === "password") {
+        input.type = "text";
+        // event.target.innerText = "🙈"; 
+    } else {
+        input.type = "password";
+        // event.target.innerText = "👁️";
+    }
+}

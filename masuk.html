@@ -505,9 +505,12 @@
             <i class="fa-solid fa-eye toggle-password" id="eye-confirm" onclick="toggleVisibility('confirmPass', 'eye-confirm')"></i>
           </div>
 
-          <p style="font-size: 12px; color: #64748b; margin-bottom: 15px; text-align: center;">
-            Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.
-          </p>
+          <div class="form-group checkbox-group" style="justify-content: center; margin-top: 20px;">
+            <input type="checkbox" id="setujuData" required>
+            <label for="setujuData" style="text-align: left; line-height: 1.5;">
+                Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.
+            </label>
+          </div>
 
           <button type="submit" class="btn-auth">Daftar Anggota & Unggah Identitas</button>
         </form>

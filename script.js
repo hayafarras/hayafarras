@@ -70,6 +70,7 @@ function switchTab(type) {
     }
 }
 
+// Fungsi untuk ikon mata di kata sandi
 function toggleVisibility(inputId, iconId) {
     const passwordInput = document.getElementById(inputId);
     const eyeIcon = document.getElementById(iconId);
@@ -86,5 +87,32 @@ function toggleVisibility(inputId, iconId) {
         // Ubah ikon jadi mata terbuka
         eyeIcon.classList.remove("fa-eye-slash");
         eyeIcon.classList.add("fa-eye");
+    }
+}
+
+// Fungsi untuk menyalin alamat jika ceklis dicentang
+function copyAlamat() {
+    const alamatIdentitas = document.getElementById('alamatIdentitas');
+    const alamatSekarang = document.getElementById('alamatSekarang');
+    const checkbox = document.getElementById('samaAlamat');
+
+    if (checkbox.checked) {
+        alamatSekarang.value = alamatIdentitas.value;
+        alamatSekarang.readOnly = true; // Opsional: mengunci input agar tidak diedit manual
+    } else {
+        alamatSekarang.value = "";
+        alamatSekarang.readOnly = false;
+    }
+}
+
+// Fungsi untuk memunculkan kolom "Lainnya" pada pekerjaan
+function checkPekerjaan() {
+    const select = document.getElementById('pekerjaanSelect');
+    const lainnyaDiv = document.getElementById('pekerjaanLainnya');
+    
+    if (select.value === 'lainnya') {
+        lainnyaDiv.style.display = 'block';
+    } else {
+        lainnyaDiv.style.display = 'none';
     }
 }

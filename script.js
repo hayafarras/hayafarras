@@ -116,3 +116,21 @@ function checkPekerjaan() {
         lainnyaDiv.style.display = 'none';
     }
 }
+
+// Fungsi untuk kesamaan new pass dan confirm pass
+const newPass = document.getElementById('newPass');
+const confirmPass = document.getElementById('confirmPass');
+
+function validatePassword() {
+  if (newPass.value !== confirmPass.value) {
+    // Memberikan pesan error jika tidak sama
+    confirmPass.setCustomValidity("Kata sandi tidak cocok!");
+  } else {
+    // Kosongkan pesan error jika sudah sama
+    confirmPass.setCustomValidity('');
+  }
+}
+
+// Jalankan fungsi setiap kali user mengetik di kedua field tersebut
+newPass.onchange = validatePassword;
+confirmPass.onkeyup = validatePassword;

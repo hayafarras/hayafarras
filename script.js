@@ -90,6 +90,34 @@ function toggleVisibility(inputId, iconId) {
     }
 }
 
+function updatePlaceholder() {
+    const jenis = document.getElementById('jenisIdentitas').value;
+    const inputNo = document.getElementById('nomorIdentitas');
+
+    if (jenis === 'ktp' || jenis === 'kk') {
+        inputNo.placeholder = "Masukkan NIK 16 digit angka";
+        inputNo.setAttribute('maxlength', '16');
+        inputNo.setAttribute('minlength', '16');
+        // Memastikan hanya angka yang bisa diinput
+        inputNo.setAttribute('pattern', '[0-9]{16}');
+        inputNo.title = "NIK harus berjumlah 16 digit angka";
+    } else if (jenis === 'kitas') {
+        inputNo.placeholder = "Masukkan KITAS 11 digit";
+        inputNo.setAttribute('maxlength', '11');
+        inputNo.setAttribute('minlength', '11');
+        inputNo.setAttribute('pattern', '[a-zA-Z0-9]{11}');
+        inputNo.title = "KITAS harus berjumlah 11 karakter";
+    } else {
+        inputNo.placeholder = "Pilih jenis identitas dulu";
+        inputNo.removeAttribute('maxlength');
+        inputNo.removeAttribute('minlength');
+        inputNo.removeAttribute('pattern');
+    }
+    
+    // Reset nilai input setiap kali jenis identitas diganti agar validasi fresh
+    inputNo.value = "";
+}
+
 // Fungsi untuk menyalin alamat jika ceklis dicentang
 function copyAlamat() {
     const alamatIdentitas = document.getElementById('alamatIdentitas');

@@ -105,7 +105,7 @@
     }
 
     /* MAIN CONTENT */
-    main {
+   main {
       flex: 1;
       display: flex;
       align-items: center;
@@ -122,7 +122,7 @@
     .auth-container {
       background: white;
       width: 100%;
-      max-width: 550px;
+      max-width: 700px;
       padding: 30px;
       border-radius: 20px;
       box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1);
@@ -171,10 +171,10 @@
       position: relative;
     }
 
-    .toggle-password {
+     .toggle-password {
       position: absolute;
       right: 15px;
-      top: 41px;
+      top: 51px;
       transform: translateY(-50%);
       cursor: pointer;
       color: #64748b;
@@ -196,7 +196,8 @@
       color: #4b5563;
     }
 
-    .form-group input, .form-group select {
+    .form-group input,
+    .form-group select {
       width: 100%;
       padding: 12px 15px;
       border: 1px solid #dbeafe;
@@ -210,8 +211,9 @@
     .form-group input[type="text"]:not(#alamatIdentitas):not(#alamatSekarang) {
       padding-right: 45px;
     }
-
-    .form-group input:focus, .form-group select:focus {
+    
+    .form-group input:focus,
+    .form-group select:focus {
       outline: none;
       border-color: #1e3a8a;
       background: white;
@@ -263,6 +265,10 @@
       transition: 0.3s;
     }
 
+    input[type="file"]::file-selector-button:hover {
+      background: #2563eb;
+    }
+
     /* FOOTER */
     footer {
       background-color: #1e3a8a;
@@ -276,173 +282,209 @@
 
     /* RESPONSIVE */
     @media (max-width: 768px) {
-      .auth-container { max-width: 95%; }
-      header { flex-direction: column; gap: 15px; }
-      nav { flex-wrap: wrap; justify-content: center; }
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .auth-container {
+        padding: 25px 20px; 
+      }
+      .auth-title h2 {
+        font-size: 20px; /* Mengecilkan judul sedikit di HP */
+      }
     }
 
-    #register-form { display: none; }
+    /* Hiding sections */
+    #register-form { 
+      display: none; 
+    }
   </style>
 </head>
 
 <body>
-  <header></header>
 
-  <main>
-    <div class="intro"></div>
-    <section>
-      <div class="auth-container">
-        <div class="auth-tabs">
-          <div class="tab active" onclick="switchTab('login')">Masuk</div>
-          <div class="tab" onclick="switchTab('register')">Daftar</div>
+
+ <header></header>
+
+ <main>
+  <div class="intro"></div>
+  
+  <section>
+    <div class="auth-container">
+      <div class="auth-tabs">
+        <div class="tab active" onclick="switchTab('login')">Masuk</div>
+        <div class="tab" onclick="switchTab('register')">Daftar</div>
+      </div>
+
+      <div id="login-form">
+        <div class="auth-title">
+          <h2>Selamat Datang Kembali</h2>
+          <p>Silakan masuk ke akun Anda</p>
+        </div>
+        <form>
+          <div class="form-group">
+            <label>Email atau Nomor Anggota</label>
+            <input type="text" placeholder="Masukkan email/ID Anda" required>
+          </div>
+          <div class="form-group" style="position: relative;">
+            <label>Kata Sandi</label>
+            <input type="password" id="loginPass" placeholder="••••••••" required>
+            <i class="fa-solid fa-eye toggle-password" id="eye-login" onclick="toggleVisibility('loginPass', 'eye-login')"></i>
+          </div>
+          <a href="#" class="forgot-pass">Lupa kata sandi?</a>
+          <button type="submit" class="btn-auth">Masuk Sekarang</button>
+        </form>
+      </div>
+
+      <div id="register-form">
+        <div class="auth-title">
+          <h2>Pendaftaran Anggota Online</h2>
+          <p>Mohon isi data diri sesuai dengan identitas asli Anda.</p>
         </div>
 
-        <div id="login-form">
-          <div class="auth-title">
-            <h2>Selamat Datang Kembali</h2>
-            <p>Silakan masuk ke akun Anda</p>
-          </div>
-          <form>
-            <div class="form-group">
-              <label>Email atau Nomor Anggota</label>
-              <input type="text" placeholder="Masukkan email/ID Anda" required>
-            </div>
-            <div class="form-group">
-              <label>Kata Sandi</label>
-              <input type="password" id="loginPass" placeholder="••••••••" required>
-              <i class="fa-solid fa-eye toggle-password" id="eye-login" onclick="toggleVisibility('loginPass', 'eye-login')"></i>
-            </div>
-            <a href="#" class="forgot-pass">Lupa kata sandi?</a>
-            <button type="submit" class="btn-auth">Masuk Sekarang</button>
-          </form>
-        </div>
-
-        <div id="register-form">
-          <div class="auth-title">
-            <h2>Pendaftaran Anggota Online</h2>
-            <p>Mohon isi data diri sesuai dengan identitas asli Anda.</p>
+        <form>
+          <div class="form-group">
+            <label>Nama Lengkap</label>
+            <input type="text" placeholder="Masukkan nama sesuai identitas." required>
           </div>
 
-          <form>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
-              <label>Nama Lengkap</label>
-              <input type="text" placeholder="Masukkan nama sesuai identitas" required>
+              <label>Email (Aktif)</label>
+              <input type="email" placeholder="contoh@gmail.com" pattern="[a-z0-9._%+-]+@gmail\.com$" title="Harus menggunakan alamat @gmail.com" required>
             </div>
-
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-              <div class="form-group">
-                <label>Email (Aktif)</label>
-                <input type="email" placeholder="contoh@gmail.com" required>
-              </div>
-              <div class="form-group">
-                <label>Nomor Telepon/WA</label>
-                <input type="tel" placeholder="0812..." required>
-              </div>
+            <div class="form-group">
+              <label>Nomor HP/WA</label>
+              <input type="tel" placeholder="0812..." required>
             </div>
+          </div>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-              <div class="form-group">
-                <label>Jenis Identitas</label>
-                <select required>
-                  <option value="">Pilih...</option>
-                  <option value="ktp">KTP</option>
-                  <option value="kk">KK</option>
-                  <option value="kitas">KITAS</option>
-                </select>
-              </div>
-              <div class="form-group">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <div class="form-group">
+              <label>Jenis Identitas</label>
+              <select class="form-input-style" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #dbeafe; background: #f8fbff;">
+                <option value="">Pilih...</option>
+                <option value="ktp">KTP</option>
+                <option value="kk">KK (Belum punya KTP)</option>
+                <option value="kitas">KITAS (Khusus WNA)</option>
+              </select>
+            </div>
+            <div class="form-group">
                 <label>No. Identitas (NIK/KITAS)</label>
                 <input type="text" placeholder="16 digit angka" required>
-              </div>
             </div>
-            
+          </div>
+          
+          <div class="form-group">
+            <label>Unggah Identitas (KTP/KK/KITAS)</label>
+            <input type="file" accept="image/*,.pdf" style="padding: 8px;" required>
+            <small style="font-size: 11px; color: #64748b;">Format: JPG, PNG, atau PDF (Maks. 2MB)</small>
+          </div>
+
+          <div class="form-group">
+            <label>Tempat, Tanggal Lahir</label>
+            <input type="text" placeholder="Medan, 01 Januari 2000" required>
+          </div>
+
+          <div class="form-group">
+            <label>Jenis Kelamin</label>
+            <div style="display: flex; gap: 20px; padding: 10px 0;">
+              <label style="font-weight: 400;"><input type="radio" name="jk" value="L"> Laki-laki</label>
+              <label style="font-weight: 400;"><input type="radio" name="jk" value="P"> Perempuan</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+              <label>Alamat Tinggal (Sesuai Identitas)</label>
+              <input type="text" id="alamatIdentitas" placeholder="Nama jalan, No. Rumah, RT/RW, Kec..." required>
+          </div>
+
+          <div class="form-group">
+              <label style="font-weight: 400; font-size: 12px;">
+                <input type="checkbox" id="samaAlamat" onclick="copyAlamat()"> Alamat saat ini sama dengan identitas
+              </label>
+          </div>
+
+          <div class="form-group">
+              <label>Alamat Tinggal Saat Ini</label>
+              <input type="text" id="alamatSekarang" placeholder="Alamat domisili sekarang" required>
+          </div>
+
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
             <div class="form-group">
-              <label>Unggah Identitas (KTP/KK/KITAS)</label>
-              <input type="file" accept="image/*,.pdf" required>
-              <small style="font-size: 11px; color: #64748b;">Maks. 2MB (JPG, PNG, PDF)</small>
+              <label>Pendidikan Terakhir</label>
+              <select class="form-input-style" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #dbeafe; background: #f8fbff;">
+                <option value="">Pilih...</option>
+                <option value="tk">TK</option>
+                <option value="sd">SD</option>
+                <option value="smp">SMP</option>
+                <option value="sma">SMA/SMK</option>
+                <option value="d1">D1</option>
+                <option value="d2">D2</option>
+                <option value="d3">D3</option>
+                <option value="s1">S1 / D4</option>
+                <option value="s2">S2</option>
+                <option value="s3">S3</option>
+              </select>
             </div>
-
             <div class="form-group">
-              <label>Tempat, Tanggal Lahir</label>
-              <input type="text" placeholder="Medan, 01 Januari 2000" required>
+              <label>Pekerjaan</label>
+              <select id="pekerjaanSelect" onchange="checkPekerjaan()" class="form-input-style" required style="width: 100%; padding: 12px; border-radius: 10px; border: 1px solid #dbeafe; background: #f8fbff;">
+                <option value="">Pilih...</option>
+                <option value="BUMN">BUMN</option>
+                <option value="Pegawai Negeri">Pegawai Negeri</option>
+                <option value="Peneliti">Peneliti</option>
+                <option value="TNI/Polri">TNI/Polri</option>
+                <option value="Pegawai Swasta">Pegawai Swasta</option>
+                <option value="Dosen">Dosen</option>
+                <option value="Pensiunan">Pensiunan</option>
+                <option value="Wiraswasta">Wiraswasta</option>
+                <option value="Guru">Guru</option>
+                <option value="Pelajar">Pelajar</option>
+                <option value="Mahasiswa">Mahasiswa</option>
+                <option value="lainnya">Lainnya</option>
+              </select>
             </div>
+          </div>
 
-            <div class="form-group">
-              <label>Jenis Kelamin</label>
-              <div style="display: flex; gap: 20px; padding: 5px 0;">
-                <label style="font-weight: 400;"><input type="radio" name="jk" value="L" required> Laki-laki</label>
-                <label style="font-weight: 400;"><input type="radio" name="jk" value="P"> Perempuan</label>
-              </div>
-            </div>
+          <div class="form-group" id="pekerjaanLainnya" style="display: none;">
+            <label>Sebutkan Pekerjaan Lainnya</label>
+            <input type="text" placeholder="Ketik pekerjaan Anda">
+          </div>
 
-            <div class="form-group">
-                <label>Alamat Tinggal (Sesuai Identitas)</label>
-                <input type="text" id="alamatIdentitas" placeholder="Nama jalan, No. Rumah, Kec..." required>
-            </div>
+          <div class="form-group" style="position: relative;">
+            <label>Kata Sandi Baru</label>
+            <input type="password" id="newPass" placeholder="Minimal 8 karakter (A, a, 1, #)" minlength="8"
+                   pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
+                   title="Minimal 8 karakter: harus mengandung huruf besar, huruf kecil, angka, dan simbol (contoh: @, #, $, dll)" required>
+            <i class="fa-solid fa-eye toggle-password" id="eye-new" onclick="toggleVisibility('newPass', 'eye-new')"></i>
+          </div>
 
-            <div class="form-group">
-                <label style="font-weight: 400; font-size: 12px; cursor: pointer;">
-                  <input type="checkbox" id="samaAlamat" onclick="copyAlamat()"> Alamat saat ini sama dengan identitas
-                </label>
-            </div>
+          <div class="form-group" style="position: relative;">
+            <label>Konfirmasi Kata Sandi</label>
+            <input type="password" id="confirmPass" placeholder="Ulangi kata sandi" required>
+            <i class="fa-solid fa-eye toggle-password" id="eye-confirm" onclick="toggleVisibility('confirmPass', 'eye-confirm')"></i>
+          </div>
 
-            <div class="form-group">
-                <label>Alamat Tinggal Saat Ini</label>
-                <input type="text" id="alamatSekarang" placeholder="Alamat domisili sekarang" required>
-            </div>
+          <p style="font-size: 12px; color: #64748b; margin-bottom: 15px; text-align: center;">
+            Pastikan data yang anda masukkan sesuai kartu identitas yang berlaku, benar, dan dapat dipertanggungjawabkan.
+          </p>
 
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
-              <div class="form-group">
-                <label>Pendidikan</label>
-                <select required>
-                  <option value="">Pilih...</option>
-                  <option value="sma">SMA/SMK</option>
-                  <option value="d3">D3</option>
-                  <option value="s1">S1/D4</option>
-                  <option value="s2">S2</option>
-                </select>
-              </div>
-              <div class="form-group">
-                <label>Pekerjaan</label>
-                <select id="pekerjaanSelect" onchange="checkPekerjaan()" required>
-                  <option value="">Pilih...</option>
-                  <option value="Mahasiswa">Mahasiswa</option>
-                  <option value="Pegawai Swasta">Pegawai Swasta</option>
-                  <option value="lainnya">Lainnya</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="form-group" id="pekerjaanLainnya" style="display: none;">
-              <label>Sebutkan Pekerjaan</label>
-              <input type="text" placeholder="Ketik pekerjaan Anda">
-            </div>
-
-            <div class="form-group">
-              <label>Kata Sandi Baru</label>
-              <input type="password" id="newPass" placeholder="Minimal 8 karakter" required>
-              <i class="fa-solid fa-eye toggle-password" id="eye-new" onclick="toggleVisibility('newPass', 'eye-new')"></i>
-            </div>
-            
-            <div class="form-group">
-              <label>Konfirmasi Kata Sandi</label>
-              <input type="password" id="confirmPass" placeholder="Ulangi kata sandi" required>
-              <i class="fa-solid fa-eye toggle-password" id="eye-confirm" onclick="toggleVisibility('confirmPass', 'eye-confirm')"></i>
-            </div>
-
-            <p style="font-size: 11px; color: #64748b; margin-bottom: 15px; text-align: center; line-height: 1.4;">
-              Pastikan data yang Anda masukkan benar dan sesuai dengan kartu identitas yang berlaku.
-            </p>
-
-            <button type="submit" class="btn-auth">Daftar Anggota</button>
-          </form>
-        </div>
+          <button type="submit" class="btn-auth">Daftar Anggota & Unggah Identitas</button>
+        </form>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+ </main>
 
-  <footer></footer>
+ <footer></footer>
 
-  <script src="script.js"></script>
+ <script src="script.js"></script>
+
 </body>
 </html>

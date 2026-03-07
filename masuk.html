@@ -109,14 +109,20 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      padding: 40px 20px;
+      padding: 20px;
+    }
+
+    main section {
+      width: 100%;
+      display: flex;
+      justify-content: center;
     }
 
     .auth-container {
       background: white;
       width: 100%;
       max-width: 450px;
-      padding: 40px;
+      padding: 30px;
       border-radius: 20px;
       box-shadow: 0 15px 35px rgba(30, 58, 138, 0.1);
     }
@@ -237,6 +243,12 @@
         flex-wrap: wrap;
         justify-content: center;
       }
+      .auth-container {
+        padding: 25px 20px; 
+      }
+      .auth-title h2 {
+        font-size: 20px; /* Mengecilkan judul sedikit di HP */
+      }
     }
 
     /* Hiding sections */
@@ -288,15 +300,24 @@
         <form>
           <div class="form-group">
             <label>Nama Lengkap</label>
-            <input type="text" placeholder="Contoh: Reyhan Aris" required>
+            <input type="text" placeholder="Contoh: Anton Baskara" required>
           </div>
           <div class="form-group">
             <label>Email</label>
-            <input type="email" placeholder="nama@email.com" required>
+            <input type="email" 
+                   placeholder="contoh@gmail.com" 
+                   pattern="[a-z0-9._%+-]+@gmail\.com$" 
+                   title="Harus menggunakan alamat @gmail.com" 
+                   required>
           </div>
           <div class="form-group">
-            <label>Kata Sandi Baru</label>
-            <input type="password" placeholder="Minimal 8 karakter" required>
+           <label>Kata Sandi Baru</label>
+           <input type="password" 
+                  placeholder="Minimal 8 karakter (A, a, 1, #)" 
+                  minlength="8"
+                  pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 
+                  title="Minimal 8 karakter: harus mengandung huruf besar, huruf kecil, angka, dan simbol (contoh: @, #, $, dll)" 
+                  required>
           </div>
           <button type="submit" class="btn-auth">Daftar Anggota</button>
         </form>

@@ -169,6 +169,23 @@
       margin-bottom: 20px; 
     }
 
+     .toggle-password {
+      position: absolute;
+      right: 15px;
+      top: 50%;
+      transform: translateY(2px);
+      cursor: pointer;
+      color: #64748b;
+      font-size: 16px;
+      user-select: none;
+      transition: 0.2s;
+      z-index: 10;
+    }
+
+    .toggle-password:hover {
+      color: #1e3a8a;
+    }
+
     .form-group label {
       display: block;
       font-size: 13px;
@@ -180,6 +197,7 @@
     .form-group input {
       width: 100%;
       padding: 12px 15px;
+      padding-right: 45px !important;
       border: 1px solid #dbeafe;
       border-radius: 10px;
       font-family: inherit;
@@ -210,21 +228,6 @@
     .btn-auth:hover { 
       background: #2563eb; 
       transform: translateY(-2px); 
-    }
-
-    .toggle-password {
-      position: absolute;
-      right: 15px;
-      top: 38px;
-      cursor: pointer;
-      color: #64748b;
-      font-size: 16px;
-      user-select: none;
-      transition: 0.2s;
-    }
-
-    .toggle-password:hover {
-      color: #1e3a8a;
     }
 
     .forgot-pass {
@@ -301,7 +304,7 @@
           </div>
           <div class="form-group" style="position: relative;">
             <label>Kata Sandi</label>
-            <input type="password" placeholder="••••••••" required>
+            <input type="password" id="loginPass" placeholder="••••••••" required>
             <i class="fa-solid fa-eye toggle-password" id="eye-login" onclick="toggleVisibility('loginPass', 'eye-login')"></i>
           </div>
           <a href="#" class="forgot-pass">Lupa kata sandi?</a>
@@ -329,6 +332,7 @@
           <div class="form-group" style="position: relative;">
             <label>Kata Sandi Baru</label>
             <input type="password" 
+                   id="newPass"
                    placeholder="Minimal 8 karakter (A, a, 1, #)" 
                    minlength="8"
                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}" 

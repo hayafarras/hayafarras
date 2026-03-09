@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function() {
     // 1. TEMPLATE HEADER (BINGKAI ATAS)
     const headerHTML = `
         <div class="logo-title">
-          <img src="logo.png" alt="Logo" class="logo">
+          <img src="logo.PNG" alt="Logo" class="logo">
           <h1>Lentera Publika</h1>
         </div>
         <nav>
@@ -162,4 +162,5 @@ function validatePassword() {
 // Jalankan fungsi setiap kali user mengetik di kedua field tersebut
 newPass.onchange = validatePassword;
 confirmPass.onkeyup = validatePassword;
+
 

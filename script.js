@@ -70,7 +70,7 @@ document.addEventListener("DOMContentLoaded", function() {
             bookContainer.innerHTML = '';
 
             books.forEach(buku => {
-                // Sekarang dibungkus tag <a> agar seluruh kartu bisa diklik
+                // Seluruh kartu dibungkus tag <a> tanpa footer status/tombol
                 bookContainer.innerHTML += `
                     <a href="detail-buku.html?id=${buku.id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
                         <div class="book-card">
@@ -79,34 +79,50 @@ document.addEventListener("DOMContentLoaded", function() {
                             </div>
                             <h3 class="book-title">${buku.judul}</h3>
                             <p class="book-author">Oleh: ${buku.pengarang}</p>
-                            </div>
+                        </div>
                     </a>
                 `;
             });
         }
         loadBooks();
 
-        // Fitur Search (Temu Balik) - Tetap berfungsi untuk link pembungkus
+        // 6. LOGIKA SEARCH (Klik Button/Enter)
         const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        function performSearch() {
+            const term = searchInput.value.toLowerCase();
+            const cards = document.querySelectorAll('.book-card-link');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.book-title').innerText.toLowerCase();
+                const author = card.querySelector('.book-author').innerText.toLowerCase();
+                
+                if (title.includes(term) || author.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        }
+
+        // Listener Klik Tombol Search
+        if (searchBtn) {
+            searchBtn.addEventListener('click', performSearch);
+        }
+
+        // Listener Tombol Enter di Keyboard
         if (searchInput) {
-            searchInput.addEventListener('input', function(e) {
-                const term = e.target.value.toLowerCase();
-                const cards = document.querySelectorAll('.book-card-link');
-                cards.forEach(card => {
-                    const title = card.querySelector('.book-title').innerText.toLowerCase();
-                    const author = card.querySelector('.book-author').innerText.toLowerCase();
-                    if (title.includes(term) || author.includes(term)) {
-                        card.style.display = 'block';
-                    } else {
-                        card.style.display = 'none';
-                    }
-                });
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
+                }
             });
         }
     }
 });
 
-// FUNGSI GLOBAL LAINNYA (Login/Daftar)
+// FUNGSI GLOBAL (PENTING: Di luar DOMContentLoaded)
 function switchTab(type) {
     const loginForm = document.getElementById('login-form');
     const regForm = document.getElementById('register-form');

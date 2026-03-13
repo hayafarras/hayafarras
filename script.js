@@ -70,36 +70,33 @@ document.addEventListener("DOMContentLoaded", function() {
             bookContainer.innerHTML = '';
 
             books.forEach(buku => {
+                // Sekarang dibungkus tag <a> agar seluruh kartu bisa diklik
                 bookContainer.innerHTML += `
-                    <div class="book-card">
-                        <div class="book-cover">
-                            <img src="${buku.image_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
-                        </div>
-                        <h3 class="book-title">${buku.judul}</h3>
-                        <p class="book-author">Oleh: ${buku.pengarang}</p>
-                        <div class="book-footer">
-                            <div class="status-badge status-available">
-                                ● Tersedia
+                    <a href="detail-buku.html?id=${buku.id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="${buku.image_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
                             </div>
-                            <button class="btn-detail" onclick="showBookDetail('${buku.judul}', '${buku.pengarang}', '${buku.penerbit || '-'}')">Detail</button>
-                        </div>
-                    </div>
+                            <h3 class="book-title">${buku.judul}</h3>
+                            <p class="book-author">Oleh: ${buku.pengarang}</p>
+                            </div>
+                    </a>
                 `;
             });
         }
         loadBooks();
 
-        // Fitur Search (Temu Balik)
+        // Fitur Search (Temu Balik) - Tetap berfungsi untuk link pembungkus
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
             searchInput.addEventListener('input', function(e) {
                 const term = e.target.value.toLowerCase();
-                const cards = document.querySelectorAll('.book-card');
+                const cards = document.querySelectorAll('.book-card-link');
                 cards.forEach(card => {
                     const title = card.querySelector('.book-title').innerText.toLowerCase();
                     const author = card.querySelector('.book-author').innerText.toLowerCase();
                     if (title.includes(term) || author.includes(term)) {
-                        card.style.display = 'flex';
+                        card.style.display = 'block';
                     } else {
                         card.style.display = 'none';
                     }
@@ -109,11 +106,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
-// FUNGSI GLOBAL
-function showBookDetail(judul, pengarang, penerbit) {
-    alert(`DETAIL BUKU\n\nJudul: ${judul}\nPengarang: ${pengarang}\nPenerbit: ${penerbit}`);
-}
-
+// FUNGSI GLOBAL LAINNYA (Login/Daftar)
 function switchTab(type) {
     const loginForm = document.getElementById('login-form');
     const regForm = document.getElementById('register-form');

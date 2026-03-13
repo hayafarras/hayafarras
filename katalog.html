@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Katalog - Perpustakaan Lentera Publika</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f0f7ff, #ffffff);
+      color: #2c2c2c;
+    }
+
+    /* TRANSISI INTRO */
+    .intro {
+      position: absolute;
+      inset: 0;
+      background: #f0f7ff; 
+      z-index: 100;
+      pointer-events: none;
+      animation: fadeOutTransition 1.0s ease-in-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeOutTransition {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* HEADER */
+    header {
+      background-color: #1e3a8a;
+      padding: 20px 5%;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      animation: slideDown 0.5s ease-out;
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+
+    .logo-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .logo {
+      width: 70px;
+      height: 70px;
+      object-fit: contain;
+      filter: brightness(0) invert(1); 
+      margin-right: -5px;
+    }
+
+    header h1 {
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    /* NAVIGASI */
+    nav {
+      display: flex;
+      gap: 10px;
+    }
+
+    nav a {
+      text-decoration: none;
+      font-weight: 500;
+      color: #bfdbfe;
+      font-size: 14px;
+      transition: 0.3s;
+      padding: 8px 12px;
+      border-radius: 8px;
+    }
+
+    nav a:hover, nav a.active {
+      color: white;
+      background: rgba(255,255,255,0.1);
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    /* Container Utama Katalog */
+    .catalog-container {
+      max-width: 1100px;
+      margin: 20px auto;
+      padding: 0 20px;
+    }
+
+    /* Styling Bar Pencarian */
+    .search-wrapper {
+      margin-bottom: 40px;
+      text-align: center;
+    }
+
+    .search-input {
+      width: 100%;
+      max-width: 500px;
+      padding: 15px 25px;
+      border-radius: 30px;
+      border: 2px solid #e2e8f0;
+      font-family: 'Poppins', sans-serif;
+      font-size: 15px;
+      transition: 0.3s;
+      outline: none;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+
+    .search-input:focus {
+      border-color: #2563eb;
+      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+    }
+
+    /* Card Buku */
+    .book-card {
+      background: white;
+      padding: 20px;
+      border-radius: 15px;
+      border: 1px solid #e2e8f0;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      height: 100%; /* Biar tinggi kotak sama semua */
+    }
+
+    .book-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 12px 25px rgba(30, 58, 138, 0.1);
+      border-color: #bfdbfe;
+    }
+
+    /* Tempat Cover Buku */
+    .book-cover {
+      width: 100%;
+      height: 220px;
+      background-color: #f8fafc;
+      border-radius: 10px;
+      margin-bottom: 15px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .book-cover img {
+      height: 100%;
+      width: 100%;
+      object-fit: cover; /* Biar gambar gak penyok */
+    }
+
+    /* Info Buku */
+    .book-category {
+      font-size: 10px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #2563eb;
+      background: #eff6ff;
+      padding: 4px 10px;
+      border-radius: 20px;
+      display: inline-block;
+      margin-bottom: 10px;
+    }
+
+    .book-title {
+      font-size: 17px;
+      color: #1e3a8a;
+      font-weight: 600;
+      margin-bottom: 5px;
+      line-height: 1.4;
+    }
+
+    .book-author {
+      font-size: 13px;
+      color: #64748b;
+      margin-bottom: 15px;
+    }
+
+    /* Status & Tombol */
+    .book-footer {
+      margin-top: auto; /* Biar nempel di bawah card */
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 15px;
+      border-top: 1px dashed #e2e8f0;
+    }
+
+    .status-badge {
+      font-size: 12px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .status-available { color: #10b981; }
+    .status-borrowed { color: #ef4444; }
+
+    .btn-detail {
+      background: #1e3a8a;
+      color: white;
+      border: none;
+      padding: 7px 15px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn-detail:hover {
+      background: #2563eb;
+    }
+    
+    /* FOOTER */
+    footer {
+      background-color: #1e3a8a;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-top: auto;
+      width: 100%;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        gap: 15px;
+        padding: 20px;
+      }
+      nav {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+
+  <header></header>
+
+  <main>
+    <div class="search-wrapper">
+      <h2 style="color: #1e3a8a; margin-bottom: 10px;">Koleksi Buku</h2>
+      <input type="text" id="searchInput" class="search-input" placeholder="Cari judul buku atau penulis...">
+    </div>
+
+    <div id="loading" style="text-align: center; padding: 50px;">Memuat koleksi buku...</div>
+    <div class="book-grid" id="bookContainer"></div>
+  </main>
+
+  <footer></footer>
+
+  <script src="script.js"></script>
+
+</body>
+</html>

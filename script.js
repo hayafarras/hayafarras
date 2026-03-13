@@ -43,10 +43,8 @@ document.addEventListener("DOMContentLoaded", function() {
                 e.preventDefault(); 
                 alert("Kata sandi konfirmasi tidak cocok!");
             } else {
-                // Simulasi Berhasil
                 const idAnggota = document.getElementById('nomorIdentitas').value;
                 const emailUser = document.querySelector('input[type="email"]').value;
-
                 alert(`Pendaftaran Berhasil!\n\nID Anggota: ${idAnggota}\nEmail: ${emailUser}\n\nHarap simpan data ini untuk masuk.`);
             }
         });
@@ -75,15 +73,15 @@ document.addEventListener("DOMContentLoaded", function() {
                 bookContainer.innerHTML += `
                     <div class="book-card">
                         <div class="book-cover">
-                            <img src="${buku.image_url || 'https://via.placeholder.com/150x250?text=No+Cover'}" alt="Cover">
+                            <img src="${buku.image_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
                         </div>
                         <h3 class="book-title">${buku.judul}</h3>
                         <p class="book-author">Oleh: ${buku.pengarang}</p>
                         <div class="book-footer">
-                            <div class="status-badge ${buku.stok > 0 ? 'status-available' : 'status-borrowed'}">
-                                ● ${buku.stok > 0 ? 'Tersedia' : 'Dipinjam'}
+                            <div class="status-badge status-available">
+                                ● Tersedia
                             </div>
-                            <button class="btn-detail" onclick="alert('Buku: ${buku.judul}')">Detail</button>
+                            <button class="btn-detail" onclick="showBookDetail('${buku.judul}', '${buku.pengarang}', '${buku.penerbit || '-'}')">Detail</button>
                         </div>
                     </div>
                 `;
@@ -91,22 +89,31 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         loadBooks();
 
-        // Fitur Search
+        // Fitur Search (Temu Balik)
         const searchInput = document.getElementById('searchInput');
         if (searchInput) {
             searchInput.addEventListener('input', function(e) {
                 const term = e.target.value.toLowerCase();
                 const cards = document.querySelectorAll('.book-card');
                 cards.forEach(card => {
-                    const text = card.innerText.toLowerCase();
-                    card.style.display = text.includes(term) ? 'flex' : 'none';
+                    const title = card.querySelector('.book-title').innerText.toLowerCase();
+                    const author = card.querySelector('.book-author').innerText.toLowerCase();
+                    if (title.includes(term) || author.includes(term)) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
                 });
             });
         }
     }
-}); // <-- Penutup DOMContentLoaded Utama
+});
 
-// FUNGSI GLOBAL (Taruh di luar agar bisa dipanggil onclick dari HTML)
+// FUNGSI GLOBAL
+function showBookDetail(judul, pengarang, penerbit) {
+    alert(`DETAIL BUKU\n\nJudul: ${judul}\nPengarang: ${pengarang}\nPenerbit: ${penerbit}`);
+}
+
 function switchTab(type) {
     const loginForm = document.getElementById('login-form');
     const regForm = document.getElementById('register-form');

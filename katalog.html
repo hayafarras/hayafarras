@@ -109,7 +109,7 @@
       width: 100%;
     }
 
-    /* Search Bar dengan Ikon */
+    /* Search Bar */
     .search-wrapper {
       margin-bottom: 40px;
       text-align: center;
@@ -117,11 +117,13 @@
       max-width: 600px;
       margin-left: auto;
       margin-right: auto;
+      display: flex;
+      align-items: center;
     }
 
     .search-input {
       width: 100%;
-      padding: 15px 50px 15px 25px;
+      padding: 15px 60px 15px 25px;
       border-radius: 30px;
       border: 2px solid #e2e8f0;
       font-family: 'Poppins', sans-serif;
@@ -131,42 +133,61 @@
       box-shadow: 0 4px 15px rgba(0,0,0,0.03);
     }
 
-    .search-input:focus {
-      border-color: #2563eb;
-      box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
-    }
-
-    .search-icon {
+    .search-button {
       position: absolute;
-      right: 20px;
+      right: 5px; /* Jarak dari tepi kanan input */
       top: 50%;
       transform: translateY(-50%);
+      background-color: #1e3a8a; /* Warna biru tema kamu */
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: 0.3s;
       font-size: 18px;
-      pointer-events: none;
     }
 
-    /* GRID SYSTEM (Model Samping Kanan-Kiri) */
+    .search-button:hover {
+      background-color: #2563eb;
+      box-shadow: 0 4px 10px rgba(37, 99, 235, 0.3);
+    }
+
+    /* GRID SYSTEM */
     .book-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 25px;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 30px;
     }
 
-    /* Card Buku */
+    /* Card Buku sebagai Link */
+    .book-card-link {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
     .book-card {
       background: white;
-      padding: 15px;
+      padding: 20px;
       border-radius: 15px;
       border: 1px solid #e2e8f0;
-      transition: all 0.3s ease;
+      height: 100%;
       display: flex;
       flex-direction: column;
-      height: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .book-card:hover {
-      transform: translateY(-8px);
-      box-shadow: 0 12px 25px rgba(30, 58, 138, 0.1);
+    .book-card-link:hover .book-card {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(30, 58, 138, 0.1);
+      border-color: #bfdbfe;
     }
 
     .book-cover {
@@ -184,57 +205,26 @@
     .book-cover img {
       height: 100%;
       width: 100%;
-      object-fit: contain; /* Gambar utuh, tidak terpotong */
+      object-fit: contain;
     }
 
     .book-title {
       font-size: 16px;
       color: #1e3a8a;
       font-weight: 600;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       display: -webkit-box;
-      -webkit-line-clamp: 2; /* Maksimal 2 baris judul */
+      -webkit-line-clamp: 2;
       -webkit-box-orient: vertical;
+      line-clamp: 2;
       overflow: hidden;
+      line-height: 1.4;
     }
 
     .book-author {
       font-size: 13px;
       color: #64748b;
-      margin-bottom: 15px;
-    }
-
-    /* Status & Tombol */
-    .book-footer {
-      margin-top: auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding-top: 15px;
-      border-top: 1px dashed #e2e8f0;
-    }
-
-    .status-badge {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    .status-available { 
-      color: #10b981; 
-    }
-
-    .btn-detail {
-      background: #1e3a8a;
-      color: white;
-      border: none;
-      padding: 8px 15px;
-      border-radius: 8px;
-      font-size: 12px;
-      cursor: pointer;
-      transition: 0.3s;
-    }
-
-    .btn-detail:hover { background: #2563eb; 
+      font-weight: 400;
     }
     
     /* FOOTER */
@@ -259,6 +249,10 @@
         flex-wrap: wrap;
         justify-content: center;
       }
+      .book-grid {
+        grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+        gap: 15px;
+      }
     }
   </style>
 </head>
@@ -270,12 +264,11 @@
 
   <main>
     <div class="search-wrapper">
-      <h2 style="color: #1e3a8a; margin-bottom: 15px;">Koleksi Buku</h2>
       <input type="text" id="searchInput" class="search-input" placeholder="Cari judul atau pengarang...">
-      <span class="search-icon">🔍</span>
+      <button id="searchBtn" class="search-button">🔍</button>
     </div>
 
-    <div id="loading" style="text-align: center; padding: 50px;">Memuat koleksi buku...</div>
+    <div id="loading" style="text-align: center; padding: 50px; color: #64748b;">Memuat koleksi buku...</div>
     <div class="book-grid" id="bookContainer"></div>
   </main>
 

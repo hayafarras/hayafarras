@@ -78,7 +78,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             <img src="${buku.image_url || 'https://via.placeholder.com/150x250?text=No+Cover'}" alt="Cover">
                         </div>
                         <h3 class="book-title">${buku.judul}</h3>
-                        <p class="book-author">Oleh: ${buku.penulis}</p>
+                        <p class="book-author">Oleh: ${buku.pengarang}</p>
                         <div class="book-footer">
                             <div class="status-badge ${buku.stok > 0 ? 'status-available' : 'status-borrowed'}">
                                 ● ${buku.stok > 0 ? 'Tersedia' : 'Dipinjam'}

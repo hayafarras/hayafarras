@@ -61,75 +61,51 @@ async function loadBookDetail() {
         }
 
         // 3. Render ke HTML 
-        // Menggunakan struktur kelas yang sinkron dengan CSS di file HTML
         detailContainer.innerHTML = `
-            <div class="detail-container">
-                <div class="left">
-                    <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" 
-                         class="book-cover-large" alt="Cover Buku">
+    <div class="detail-container">
+        <div class="left">
+            <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" class="book-cover-large">
+        </div>
+        
+        <div class="right">
+            <div class="book-info">
+                <h1>${buku.judul}</h1>
+                <p class="author">${buku.pengarang}</p>
+                
+                <h3>Informasi Bibliografi</h3>
+                <div class="info-grid">
+                    <div class="info-label">ISBN</div><div class="info-value">${buku.ISBN || '-'}</div>
+                    <div class="info-label">Penerbit</div><div class="info-value">${buku.penerbit} (${buku.tahun_terbit || '-'})</div>
+                    <div class="info-label">Deskripsi Fisik</div><div class="info-value">${buku.deskripsi_fisik || '-'}</div>
+                    <div class="info-label">Subjek</div><div class="info-value">${buku.subjek || '-'}</div>
+                    <div class="info-label">Bahasa</div><div class="info-value">${buku.bahasa || 'Indonesia'}</div>
+                    <div class="info-label">Nomor Panggil</div><div class="info-value" style="color: #2563eb; font-weight: bold;">${buku.nomor_panggil || '-'}</div>
                 </div>
 
-                <div class="right">
-                    <div class="book-info">
-                        <h1>${buku.judul}</h1>
-                        <p class="author">${buku.pengarang || 'Penulis tidak diketahui'}</p>
-                        
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px; margin-top: 10px;">
-                            Informasi Bibliografi
-                        </h3>
-                        
-                        <div class="info-grid">
-                            <div class="info-label">ISBN</div>
-                            <div class="info-value">${buku.ISBN || '-'}</div>
-                            
-                            <div class="info-label">Penerbit</div>
-                            <div class="info-value">${buku.penerbit || '-'} ${buku.tahun_terbit ? '(' + buku.tahun_terbit + ')' : ''}</div>
-                            
-                            <div class="info-label">Edisi</div>
-                            <div class="info-value">${buku.edisi || '-'}</div>
+                <h3>Status Ketersediaan Item</h3>
+                <div class="table-wrapper">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Kode Item</th>
+                                <th>Status</th>
+                                <th>Lokasi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${stokRows}
+                        </tbody>
+                    </table>
+                </div>
 
-                            <div class="info-label">Deskripsi Fisik</div>
-                            <div class="info-value">${buku.deskripsi_fisik || '-'}</div>
-
-                            <div class="info-label">Subjek</div>
-                            <div class="info-value">${buku.subjek || '-'}</div>
-
-                            <div class="info-label">Bahasa</div>
-                            <div class="info-value">${buku.bahasa || 'Indonesia'}</div>
-
-                            <div class="info-label">Nomor Panggil</div>
-                            <div class="info-value" style="font-family: monospace; font-weight: 700; color: #2563eb;">
-                                ${buku.nomor_panggil || '-'}
-                            </div>
-                        </div>
-
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px; margin-top: 35px;">
-                            Status Ketersediaan Item
-                        </h3>
-                        
-                        <div class="table-wrapper">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>Kode Item</th>
-                                        <th>Status</th>
-                                        <th>Lokasi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${stokRows}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="synopsis">
-                            <h3>Sinopsis / Deskripsi</h3>
-                            <p>${buku.deskripsi || 'Tidak ada deskripsi tersedia untuk buku ini.'}</p>
-                        </div>
-                    </div>
+                <h3>Sinopsis / Deskripsi</h3>
+                <div class="synopsis-text">
+                    ${buku.deskripsi || 'Tidak ada deskripsi tersedia untuk buku ini.'}
                 </div>
             </div>
-        `;
+        </div>
+    </div>
+`;
 
     } catch (err) {
         console.error("Error loading detail:", err);

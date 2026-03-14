@@ -60,10 +60,10 @@ async function loadBookDetail() {
             stokRows = `<tr><td colspan="3" style="padding: 30px; text-align: center; color: #94a3b8;">Data item fisik buku tidak ditemukan.</td></tr>`;
         }
 
-        // 3. Render ke HTML
-        // Note: Inline styles dikurangi karena sudah ditangani oleh CSS di file HTML
+        // 3. Render ke HTML 
+        // Menggunakan struktur kelas yang sinkron dengan CSS di file HTML
         detailContainer.innerHTML = `
-            <div class="detail-container" style="animation: fadeIn 0.8s ease-out;">
+            <div class="detail-container">
                 <div class="left">
                     <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" 
                          class="book-cover-large" alt="Cover Buku">
@@ -137,5 +137,4 @@ async function loadBookDetail() {
     }
 }
 
-// Jalankan fungsi saat halaman siap
 document.addEventListener("DOMContentLoaded", loadBookDetail);

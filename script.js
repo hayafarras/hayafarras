@@ -1,159 +1,167 @@
-const SB_URL = 'https://zybrhmbjvhzrvpykgpux.supabase.co';
-const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5YnJobWJqdmh6cnZweWtncHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMTY5MDUsImV4cCI6MjA4ODg5MjkwNX0.o301u_q0OAhElangyonZdKCRgxDMuTtoahictrGyHxA';
-const _supabase = supabase.createClient(SB_URL, SB_KEY);
+document.addEventListener("DOMContentLoaded", function() {
+    // 1. TEMPLATE HEADER
+    const headerHTML = `
+        <div class="logo-title">
+          <img src="logo.PNG" alt="Logo" class="logo">
+          <h1>Lentera Publika</h1>
+        </div>
+        <nav>
+          <a href="index.html" id="link-index">Beranda</a>
+          <a href="katalog.html" id="link-katalog">Katalog</a>
+          <a href="layanan.html" id="link-layanan">Layanan</a>
+          <a href="kegiatan.html" id="link-kegiatan">Kegiatan</a>
+          <a href="kontak.html" id="link-kontak">Kontak</a>
+          <a href="masuk.html" id="link-masuk">Masuk/Daftar</a>
+        </nav>
+    `;
 
-async function loadBookDetail() {
-    const detailContainer = document.getElementById('detail-content');
-    const urlParams = new URLSearchParams(window.location.search);
-    const bookId = urlParams.get('id');
+    // 2. TEMPLATE FOOTER
+    const footerHTML = `
+        <p>© 2026 Perpustakaan Lentera Publika</p>
+        <p style="margin-top: 5px; font-weight: 300; opacity: 0.8;">Mewujudkan Masyarakat Literat di Era Digital</p>
+    `;
 
-    if (!bookId) {
-        detailContainer.innerHTML = "<div class='status-msg'>ID Buku tidak ditemukan.</div>";
-        return;
+    const headerElement = document.querySelector("header");
+    const footerElement = document.querySelector("footer");
+
+    if(headerElement) headerElement.innerHTML = headerHTML;
+    if(footerElement) footerElement.innerHTML = footerHTML;
+
+    // 3. MENU ACTIVE
+    const path = window.location.pathname.split("/").pop() || "index.html";
+    const activeLink = document.getElementById("link-" + path.split(".")[0]);
+    if(activeLink) activeLink.classList.add("active");
+
+    // 4. LOGIKA FORM PENDAFTARAN
+    const regFormElement = document.querySelector("#register-form form");
+    if (regFormElement) {
+        regFormElement.addEventListener("submit", function(e) {
+            const pass = document.getElementById("newPass").value;
+            const confirm = document.getElementById("confirmPass").value;
+
+            if (pass !== confirm) {
+                e.preventDefault(); 
+                alert("Kata sandi konfirmasi tidak cocok!");
+            } else {
+                const idAnggota = document.getElementById('nomorIdentitas').value;
+                const emailUser = document.querySelector('input[type="email"]').value;
+                alert(`Pendaftaran Berhasil!\n\nID Anggota: ${idAnggota}\nEmail: ${emailUser}\n\nHarap simpan data ini untuk masuk.`);
+            }
+        });
     }
 
-    try {
-        // 1. Ambil Data Buku Utama
-        const { data: buku, error: errBuku } = await _supabase
-            .from('koleksi_buku')
-            .select('*')
-            .eq('buku_id', bookId)
-            .single();
+    // 5. LOGIKA KATALOG (SUPABASE)
+    const bookContainer = document.getElementById('bookContainer');
+    if (bookContainer) {
+        const SB_URL = 'https://zybrhmbjvhzrvpykgpux.supabase.co';
+        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5YnJobWJqdmh6cnZweWtncHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMTY5MDUsImV4cCI6MjA4ODg5MjkwNX0.o301u_q0OAhElangyonZdKCRgxDMuTtoahictrGyHxA';
+        const _supabase = supabase.createClient(SB_URL, SB_KEY);
 
-        if (errBuku || !buku) {
-            detailContainer.innerHTML = "<div class='status-msg'>Buku tidak ditemukan.</div>";
-            return;
-        }
+        async function loadBooks() {
+            const { data: books, error } = await _supabase.from('koleksi_buku').select('*');
+            const loading = document.getElementById('loading');
 
-        // 2. Ambil Data Stok (Daftar Fisik Buku)
-        const { data: stok, error: errStok } = await _supabase
-            .from('stok_buku')
-            .select('*')
-            .eq('buku_id', bookId);
+            if (error) {
+                if(loading) loading.innerHTML = "Gagal memuat data buku.";
+                return;
+            }
 
-        // --- Generate Baris Tabel Detail Stok ---
-        let stokRows = '';
-        if (stok && stok.length > 0) {
-            stokRows = stok.map(item => {
-                const isTersedia = item.status && item.status.toLowerCase() === 'tersedia';
-                return `
-                    <tr>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-family: monospace; font-weight: bold;">
-                            ${item.kode_item || '-'}
-                        </td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
-                            <span style="padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; 
-                                background: ${isTersedia ? '#dcfce7' : '#fee2e2'}; 
-                                color: ${isTersedia ? '#166534' : '#991b1b'};">
-                                ${item.status}
-                            </span>
-                        </td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
-                            ${item.lokasi_perpustakaan || 'Perpustakaan Lentera Publika'}
-                        </td>
-                    </tr>
+            if(loading) loading.style.display = 'none';
+            bookContainer.innerHTML = '';
+
+            books.forEach(buku => {
+                // Seluruh kartu dibungkus tag <a> tanpa footer status/tombol
+                bookContainer.innerHTML += `
+                    <a href="detail-buku.html?id=${buku.buku_id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
+                        <div class="book-card">
+                            <div class="book-cover">
+                                <img src="${buku.gambar_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
+                            </div>
+                            <h3 class="book-title">${buku.judul}</h3>
+                            <p class="book-author">Oleh: ${buku.pengarang}</p>
+                        </div>
+                    </a>
                 `;
-            }).join('');
-        } else {
-            stokRows = `<tr><td colspan="3" style="padding: 20px; text-align: center; color: #94a3b8;">Data item tidak ditemukan.</td></tr>`;
+            });
+        }
+        loadBooks();
+
+        // 6. LOGIKA SEARCH (Klik Button/Enter)
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+
+        function performSearch() {
+            const term = searchInput.value.toLowerCase();
+            const cards = document.querySelectorAll('.book-card-link');
+            
+            cards.forEach(card => {
+                const title = card.querySelector('.book-title').innerText.toLowerCase();
+                const author = card.querySelector('.book-author').innerText.toLowerCase();
+                
+                if (title.includes(term) || author.includes(term)) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
         }
 
-        // 3. Render ke HTML dengan CSS Responsif
-        detailContainer.innerHTML = `
-            <style>
-                .detail-container {
-                    display: grid;
-                    grid-template-columns: 280px 1fr;
-                    gap: 30px;
-                    animation: fadeIn 0.8s ease-out;
+        // Listener Klik Tombol Search
+        if (searchBtn) {
+            searchBtn.addEventListener('click', performSearch);
+        }
+
+        // Listener Tombol Enter di Keyboard
+        if (searchInput) {
+            searchInput.addEventListener('keypress', function(e) {
+                if (e.key === 'Enter') {
+                    performSearch();
                 }
-                .book-cover-large {
-                    width: 100%;
-                    max-width: 280px;
-                    height: 400px;
-                    object-fit: cover;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                }
-                .info-grid {
-                    display: grid;
-                    grid-template-columns: 150px 1fr;
-                    gap: 10px;
-                }
-                @media (max-width: 768px) {
-                    .detail-container {
-                        grid-template-columns: 1fr;
-                    }
-                    .left {
-                        display: flex;
-                        justify-content: center;
-                    }
-                    .info-grid {
-                        grid-template-columns: 1fr;
-                        gap: 5px;
-                    }
-                    .info-label { font-weight: bold; margin-top: 10px; }
-                }
-            </style>
+            });
+        }
+    }
+});
 
-            <div class="detail-container">
-                <div class="left">
-                    <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" 
-                         class="book-cover-large" alt="Cover">
-                </div>
+// FUNGSI GLOBAL (PENTING: Di luar DOMContentLoaded)
+function switchTab(type) {
+    const loginForm = document.getElementById('login-form');
+    const regForm = document.getElementById('register-form');
+    const tabs = document.querySelectorAll('.tab');
+    if (!loginForm || !regForm) return;
 
-                <div class="right">
-                    <div class="book-info">
-                        <h1 style="margin-bottom: 5px; line-height: 1.2;">${buku.judul}</h1>
-                        <p class="author" style="font-size: 18px; color: #64748b; margin-bottom: 25px;">
-                            ${buku.pengarang}
-                        </p>
-                        
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px;">
-                            Informasi Bibliografi
-                        </h3>
-                        
-                        <div class="info-grid" style="padding-top: 15px; margin-bottom: 30px;">
-                            <div class="info-label">ISBN</div><div class="info-value">${buku.ISBN || '-'}</div>
-                            <div class="info-label">Penerbit</div><div class="info-value">${buku.penerbit} ${buku.tahun_terbit ? '('+buku.tahun_terbit+')' : ''}</div>
-                            <div class="info-label">Edisi</div><div class="info-value">${buku.edisi || '-'}</div>
-                            <div class="info-label">Deskripsi Fisik</div><div class="info-value">${buku.deskripsi_fisik || '-'}</div>
-                            <div class="info-label">Subjek</div><div class="info-value">${buku.subjek || '-'}</div>
-                            <div class="info-label">Bahasa</div><div class="info-value">${buku.bahasa || '-'}</div>
-                            <div class="info-label">Nomor Panggil</div><div class="info-value" style="font-family: monospace; font-weight: 700; color: #2563eb;">${buku.nomor_panggil || '-'}</div>
-                        </div>
-
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px;">
-                            Status Ketersediaan Item
-                        </h3>
-                        <div style="overflow-x: auto; margin-top: 15px; margin-bottom: 30px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
-                                <thead style="background: #f8fafc; color: #1e3a8a;">
-                                    <tr>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Kode Item</th>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Status</th>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Lokasi</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    ${stokRows}
-                                </tbody>
-                            </table>
-                        </div>
-
-                        <div class="synopsis" style="background: #f8faff; padding: 20px; border-radius: 15px; border: 1px solid #eef2ff;">
-                            <h3 style="font-size: 18px; margin-bottom: 10px;">Sinopsis</h3>
-                            <p style="font-size: 15px; color: #475569; line-height: 1.6;">${buku.deskripsi || 'Tidak ada deskripsi tersedia.'}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-
-    } catch (err) {
-        console.error(err);
-        detailContainer.innerHTML = "<div class='status-msg'>Terjadi gangguan koneksi.</div>";
+    if (type === 'login') {
+        loginForm.style.display = 'block'; regForm.style.display = 'none';
+        tabs[0].classList.add('active'); tabs[1].classList.remove('active');
+    } else {
+        loginForm.style.display = 'none'; regForm.style.display = 'block';
+        tabs[0].classList.remove('active'); tabs[1].classList.add('active');
     }
 }
 
-document.addEventListener("DOMContentLoaded", loadBookDetail);
+function toggleVisibility(inputId, iconId) {
+    const input = document.getElementById(inputId);
+    const icon = document.getElementById(iconId);
+    if (input.type === "password") {
+        input.type = "text"; icon.classList.replace("fa-eye", "fa-eye-slash");
+    } else {
+        input.type = "password"; icon.classList.replace("fa-eye-slash", "fa-eye");
+    }
+}
+
+function updatePlaceholder() {
+    const jenis = document.getElementById('jenisIdentitas').value;
+    const inputNo = document.getElementById('nomorIdentitas');
+    if (jenis === 'ktp' || jenis === 'kk') {
+        inputNo.placeholder = "Masukkan NIK 16 digit";
+    } else if (jenis === 'kitas') {
+        inputNo.placeholder = "Masukkan No KITAS 11 digit";
+    }
+}
+
+function copyAlamat() {
+    const check = document.getElementById('samaAlamat');
+    const asal = document.getElementById('alamatIdentitas');
+    const skrg = document.getElementById('alamatSekarang');
+    if (check.checked) { skrg.value = asal.value; skrg.readOnly = true; }
+    else { skrg.value = ""; skrg.readOnly = false; }
+}

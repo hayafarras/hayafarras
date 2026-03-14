@@ -36,65 +36,84 @@ async function loadBookDetail() {
         if (stok && stok.length > 0) {
             stokRows = stok.map(item => {
                 const isTersedia = item.status && item.status.toLowerCase() === 'tersedia';
+                const statusColor = isTersedia ? '#166534' : '#991b1b';
+                const statusBg = isTersedia ? '#dcfce7' : '#fee2e2';
+                
                 return `
                     <tr>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-family: monospace; font-weight: bold;">
+                        <td style="font-family: monospace; font-weight: bold; color: #1e293b;">
                             ${item.kode_item || '-'}
                         </td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
+                        <td>
                             <span style="padding: 4px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; 
-                                background: ${isTersedia ? '#dcfce7' : '#fee2e2'}; 
-                                color: ${isTersedia ? '#166534' : '#991b1b'};">
-                                ${item.status}
+                                background: ${statusBg}; color: ${statusColor}; display: inline-block;">
+                                ${item.status || 'Tidak diketahui'}
                             </span>
                         </td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
+                        <td style="color: #475569;">
                             ${item.lokasi_perpustakaan || 'Perpustakaan Lentera Publika'}
                         </td>
                     </tr>
                 `;
             }).join('');
         } else {
-            stokRows = `<tr><td colspan="3" style="padding: 20px; text-align: center; color: #94a3b8;">Data item tidak ditemukan.</td></tr>`;
+            stokRows = `<tr><td colspan="3" style="padding: 30px; text-align: center; color: #94a3b8;">Data item fisik buku tidak ditemukan.</td></tr>`;
         }
 
-        // 3. Render ke HTML (Bersih tanpa tag <style> di dalam JS)
+        // 3. Render ke HTML
+        // Note: Inline styles dikurangi karena sudah ditangani oleh CSS di file HTML
         detailContainer.innerHTML = `
             <div class="detail-container" style="animation: fadeIn 0.8s ease-out;">
                 <div class="left">
                     <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" 
-                         class="book-cover-large" alt="Cover">
+                         class="book-cover-large" alt="Cover Buku">
                 </div>
 
                 <div class="right">
                     <div class="book-info">
                         <h1>${buku.judul}</h1>
-                        <p class="author">${buku.pengarang}</p>
+                        <p class="author">${buku.pengarang || 'Penulis tidak diketahui'}</p>
                         
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px;">
+                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px; margin-top: 10px;">
                             Informasi Bibliografi
                         </h3>
                         
-                        <div class="info-grid" style="padding-top: 15px; margin-bottom: 30px;">
-                            <div class="info-label">ISBN</div><div class="info-value">${buku.ISBN || '-'}</div>
-                            <div class="info-label">Penerbit</div><div class="info-value">${buku.penerbit} ${buku.tahun_terbit ? '('+buku.tahun_terbit+')' : ''}</div>
-                            <div class="info-label">Edisi</div><div class="info-value">${buku.edisi || '-'}</div>
-                            <div class="info-label">Deskripsi Fisik</div><div class="info-value">${buku.deskripsi_fisik || '-'}</div>
-                            <div class="info-label">Subjek</div><div class="info-value">${buku.subjek || '-'}</div>
-                            <div class="info-label">Bahasa</div><div class="info-value">${buku.bahasa || '-'}</div>
-                            <div class="info-label">Nomor Panggil</div><div class="info-value" style="font-family: monospace; font-weight: 700; color: #2563eb;">${buku.nomor_panggil || '-'}</div>
+                        <div class="info-grid">
+                            <div class="info-label">ISBN</div>
+                            <div class="info-value">${buku.ISBN || '-'}</div>
+                            
+                            <div class="info-label">Penerbit</div>
+                            <div class="info-value">${buku.penerbit || '-'} ${buku.tahun_terbit ? '(' + buku.tahun_terbit + ')' : ''}</div>
+                            
+                            <div class="info-label">Edisi</div>
+                            <div class="info-value">${buku.edisi || '-'}</div>
+
+                            <div class="info-label">Deskripsi Fisik</div>
+                            <div class="info-value">${buku.deskripsi_fisik || '-'}</div>
+
+                            <div class="info-label">Subjek</div>
+                            <div class="info-value">${buku.subjek || '-'}</div>
+
+                            <div class="info-label">Bahasa</div>
+                            <div class="info-value">${buku.bahasa || 'Indonesia'}</div>
+
+                            <div class="info-label">Nomor Panggil</div>
+                            <div class="info-value" style="font-family: monospace; font-weight: 700; color: #2563eb;">
+                                ${buku.nomor_panggil || '-'}
+                            </div>
                         </div>
 
-                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px;">
+                        <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px; margin-top: 35px;">
                             Status Ketersediaan Item
                         </h3>
-                        <div style="overflow-x: auto; margin-top: 15px; margin-bottom: 30px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; min-width: 500px;">
-                                <thead style="background: #f8fafc; color: #1e3a8a;">
+                        
+                        <div class="table-wrapper">
+                            <table>
+                                <thead>
                                     <tr>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Kode Item</th>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Status</th>
-                                        <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Lokasi</th>
+                                        <th>Kode Item</th>
+                                        <th>Status</th>
+                                        <th>Lokasi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -103,9 +122,9 @@ async function loadBookDetail() {
                             </table>
                         </div>
 
-                        <div class="synopsis" style="background: #f8faff; padding: 20px; border-radius: 15px; border: 1px solid #eef2ff;">
-                            <h3 style="font-size: 18px; margin-bottom: 10px;">Sinopsis</h3>
-                            <p style="font-size: 15px; color: #475569; line-height: 1.6;">${buku.deskripsi || 'Tidak ada deskripsi tersedia.'}</p>
+                        <div class="synopsis">
+                            <h3>Sinopsis / Deskripsi</h3>
+                            <p>${buku.deskripsi || 'Tidak ada deskripsi tersedia untuk buku ini.'}</p>
                         </div>
                     </div>
                 </div>
@@ -113,9 +132,10 @@ async function loadBookDetail() {
         `;
 
     } catch (err) {
-        console.error(err);
-        detailContainer.innerHTML = "<div class='status-msg'>Terjadi gangguan koneksi.</div>";
+        console.error("Error loading detail:", err);
+        detailContainer.innerHTML = "<div class='status-msg'>Terjadi kesalahan saat memuat data. Silakan coba lagi nanti.</div>";
     }
 }
 
+// Jalankan fungsi saat halaman siap
 document.addEventListener("DOMContentLoaded", loadBookDetail);

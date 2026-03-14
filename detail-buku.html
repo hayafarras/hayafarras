@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detail Buku - Lentera Publika</title>
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(180deg, #f0f7ff, #ffffff);
+      color: #334155;
+      line-height: 1.6;
+    }
+
+    /* TRANSISI INTRO */
+    .intro {
+      position: absolute;
+      inset: 0;
+      background: #f0f7ff; 
+      z-index: 100;
+      pointer-events: none;
+      animation: fadeOutTransition 1.0s ease-in-out forwards;
+      animation-delay: 0.2s;
+    }
+
+    @keyframes fadeOutTransition {
+      from { opacity: 1; }
+      to { opacity: 0; visibility: hidden; }
+    }
+
+    /* HEADER */
+    header {
+      background-color: #1e3a8a;
+      padding: 15px 5%;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 900;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    @keyframes slideDown {
+      from { transform: translateY(-100%); }
+      to { transform: translateY(0); }
+    }
+
+    .btn-back {
+      color: white;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 7px; 
+      transition: all 0.3s ease;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 50px; 
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .btn-back svg {
+      transition: transform 0.3s ease;
+    }
+
+    .btn-back:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: #bfdbfe;
+    }
+
+    .btn-back:hover svg {
+      transform: translateX(-5px);
+    }
+
+    .header-logo {
+      font-weight: 700;
+      font-size: 20px;
+    }
+
+    /* MAIN CONTENT */
+    main {
+      flex: 1;
+      max-width: 1000px;
+      margin: 40px auto;
+      padding: 0 20px;
+      width: 100%;
+    }
+
+    /* Detail Container */
+    .detail-container {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 50px;
+      background: white;
+      padding: 40px;
+      border-radius: 25px;
+      box-shadow: 0 15px 35px rgba(30, 58, 138, 0.05);
+      border: 1px solid #e2e8f0;
+    }
+
+    /* Sisi Kiri: Cover */
+    .book-cover-large {
+      width: 100%;
+      border-radius: 15px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 100px;
+    }
+
+    /* Sisi Kanan: Info */
+    .book-info h1 {
+      font-size: 32px;
+      color: #1e3a8a;
+      margin-bottom: 5px;
+      font-weight: 700;
+      line-height: 1.2;
+    }
+
+    .book-info .author {
+      font-size: 18px;
+      color: #64748b;
+      margin-bottom: 30px;
+      font-weight: 400;
+    }
+
+    /* Info Grid */
+    .info-grid {
+      display: grid;
+      grid-template-columns: 160px 1fr;
+      gap: 15px;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 25px;
+      font-size: 15px;
+    }
+
+    .info-label {
+      font-weight: 600;
+      color: #1e3a8a;
+    }
+
+    .info-value {
+      color: #475569;
+    }
+
+    /* Sinopsis Section */
+    .synopsis {
+      margin-top: 35px;
+      padding-top: 25px;
+      border-top: 1px solid #f1f5f9;
+    }
+
+    .synopsis h3 {
+      margin-bottom: 12px;
+      color: #1e3a8a;
+      font-size: 18px;
+    }
+
+    .synopsis p {
+      color: #475569;
+      text-align: justify;
+      white-space: pre-line;
+    }
+
+    table th, table td {
+    border: 1px solid #e2e8f0;
+    padding: 12px;
+    vertical-align: middle;
+    }
+
+    /* FOOTER */
+    footer {
+      background-color: #1e3a8a;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 14px;
+      color: #bfdbfe;
+      margin-top: 60px;
+    }
+
+    /* Status Message */
+    .status-msg {
+      text-align: center;
+      padding: 100px 20px;
+      color: #64748b;
+      font-size: 18px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 850px) {
+      .detail-container {
+        grid-template-columns: 1fr;
+        padding: 30px;
+        gap: 30px;
+      }
+      .book-cover-large {
+        max-width: 250px;
+        margin: 0 auto;
+        position: static;
+      }
+      .book-info h1 {
+        font-size: 26px;
+        text-align: center;
+      }
+      .book-info .author {
+        text-align: center;
+      }
+      .info-grid {
+        grid-template-columns: 120px 1fr;
+      }
+      table {
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+      }
+    }
+  </style>
+</head>
+
+<body>
+    <div class="intro"></div>
+
+  <header style="animation: slideDown 0.5s ease-out;">
+  <a href="katalog.html" class="btn-back">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <line x1="19" y1="12" x2="5" y2="12"></line>
+      <polyline points="12 19 5 12 12 5"></polyline>
+    </svg>
+    Kembali
+  </a>
+  <div class="header-logo">Lentera Publika</div>
+</header>
+
+  <main id="detail-content">
+    <div class="status-msg">Memuat informasi buku...</div>
+  </main>
+
+  <footer>
+    <p>© 2026 Perpustakaan Lentera Publika</p>
+    <p style="margin-top: 5px; font-weight: 300; opacity: 0.8;">Mewujudkan Masyarakat Literat di Era Digital</p>
+  </footer>
+
+  <script src="script-detail.js"></script>
+
+</body>
+</html>

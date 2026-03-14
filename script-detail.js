@@ -58,45 +58,9 @@ async function loadBookDetail() {
             stokRows = `<tr><td colspan="3" style="padding: 20px; text-align: center; color: #94a3b8;">Data item tidak ditemukan.</td></tr>`;
         }
 
-        // 3. Render ke HTML dengan CSS Responsif
+        // 3. Render ke HTML (Bersih tanpa tag <style> di dalam JS)
         detailContainer.innerHTML = `
-            <style>
-                .detail-container {
-                    display: grid;
-                    grid-template-columns: 280px 1fr;
-                    gap: 30px;
-                    animation: fadeIn 0.8s ease-out;
-                }
-                .book-cover-large {
-                    width: 100%;
-                    max-width: 280px;
-                    height: 400px;
-                    object-fit: cover;
-                    border-radius: 12px;
-                    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-                }
-                .info-grid {
-                    display: grid;
-                    grid-template-columns: 150px 1fr;
-                    gap: 10px;
-                }
-                @media (max-width: 768px) {
-                    .detail-container {
-                        grid-template-columns: 1fr;
-                    }
-                    .left {
-                        display: flex;
-                        justify-content: center;
-                    }
-                    .info-grid {
-                        grid-template-columns: 1fr;
-                        gap: 5px;
-                    }
-                    .info-label { font-weight: bold; margin-top: 10px; }
-                }
-            </style>
-
-            <div class="detail-container">
+            <div class="detail-container" style="animation: fadeIn 0.8s ease-out;">
                 <div class="left">
                     <img src="${buku.gambar_url || 'https://via.placeholder.com/300x450?text=Tanpa+Cover'}" 
                          class="book-cover-large" alt="Cover">
@@ -104,10 +68,8 @@ async function loadBookDetail() {
 
                 <div class="right">
                     <div class="book-info">
-                        <h1 style="margin-bottom: 5px; line-height: 1.2;">${buku.judul}</h1>
-                        <p class="author" style="font-size: 18px; color: #64748b; margin-bottom: 25px;">
-                            ${buku.pengarang}
-                        </p>
+                        <h1>${buku.judul}</h1>
+                        <p class="author">${buku.pengarang}</p>
                         
                         <h3 style="color: #1e3a8a; border-bottom: 2px solid #f1f5f9; padding-bottom: 8px; font-size: 18px;">
                             Informasi Bibliografi
@@ -127,7 +89,7 @@ async function loadBookDetail() {
                             Status Ketersediaan Item
                         </h3>
                         <div style="overflow-x: auto; margin-top: 15px; margin-bottom: 30px; border-radius: 8px; border: 1px solid #e2e8f0;">
-                            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left;">
+                            <table style="width: 100%; border-collapse: collapse; font-size: 14px; text-align: left; min-width: 500px;">
                                 <thead style="background: #f8fafc; color: #1e3a8a;">
                                     <tr>
                                         <th style="padding: 12px; border-bottom: 1px solid #e2e8f0;">Kode Item</th>

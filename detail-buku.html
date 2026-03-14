@@ -203,30 +203,40 @@
 
     /* RESPONSIVE */
     @media (max-width: 850px) {
+      main {
+        margin: 20px auto;
+      }
       .detail-container {
-        grid-template-columns: 1fr;
-        padding: 30px;
-        gap: 30px;
+        grid-template-columns: 1fr; /* Jadi satu kolom */
+        padding: 20px;
+        gap: 25px;
+        border-radius: 0; /* Full width di HP lebih bagus */
       }
       .book-cover-large {
-        max-width: 250px;
+        max-width: 220px; /* Mengecilkan sedikit cover di HP */
         margin: 0 auto;
         position: static;
+        height: 320px; /* Kunci tinggi cover agar konsisten */
       }
       .book-info h1 {
-        font-size: 26px;
+        font-size: 24px;
         text-align: center;
       }
       .book-info .author {
         text-align: center;
+        margin-bottom: 20px;
       }
       .info-grid {
-        grid-template-columns: 120px 1fr;
+        grid-template-columns: 1fr; /* Label di atas nilai */
+        gap: 5px;
       }
-      table {
-        display: block;
-        overflow-x: auto;
-        white-space: nowrap;
+      .info-label {
+        font-size: 13px;
+        margin-top: 10px;
+      }
+      .info-value {
+        padding-bottom: 5px;
+        border-bottom: 1px solid #f1f5f9;
       }
     }
   </style>

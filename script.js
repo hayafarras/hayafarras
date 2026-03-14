@@ -72,10 +72,10 @@ document.addEventListener("DOMContentLoaded", function() {
             books.forEach(buku => {
                 // Seluruh kartu dibungkus tag <a> tanpa footer status/tombol
                 bookContainer.innerHTML += `
-                    <a href="detail-buku.html?id=${buku.id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
+                    <a href="detail-buku.html?id=${buku.buku_id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
                         <div class="book-card">
                             <div class="book-cover">
-                                <img src="${buku.image_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
+                                <img src="${buku.gambar_url || 'https://via.placeholder.com/150x220?text=No+Cover'}" alt="Cover">
                             </div>
                             <h3 class="book-title">${buku.judul}</h3>
                             <p class="book-author">Oleh: ${buku.pengarang}</p>

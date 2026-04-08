@@ -22,7 +22,8 @@
       flex-direction: column;
       font-family: 'Poppins', sans-serif;
       background: linear-gradient(180deg, #f0f7ff, #ffffff);
-      color: #2c2c2c;
+      color: #334155;
+      line-height: 1.6;
     }
 
     /* TRANSISI INTRO */
@@ -61,25 +62,6 @@
       to { transform: translateY(0); }
     }
 
-    .logo-title {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .logo {
-      width: 70px;
-      height: 70px;
-      object-fit: contain;
-      filter: brightness(0) invert(1); 
-      margin-right: -5px;
-    }
-
-    header h1 {
-      font-size: 22px;
-      font-weight: 700;
-    }
-
     /* NAVIGASI */
     nav {
       display: flex;
@@ -96,22 +78,15 @@
       border-radius: 8px;
     }
 
-    nav a:hover {
+    nav a:hover, nav a.active {
       color: white;
       background: rgba(255,255,255,0.1);
-    }
-
-    nav a.active {
-      color: white;
-      background: rgba(255,255,255,0.2);
     }
 
     /* MAIN CONTENT */
     main {
       flex: 1;
       width: 100%;
-      position: relative;
-      overflow: hidden;
     }
 
     .container {
@@ -135,12 +110,24 @@
       background: #dbeafe;
     }
 
-    /* EVENTS GRID FORMAT */
+    /* EVENTS GRID - Clickable Cards */
     .events-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
       gap: 25px;
-      margin-bottom: 60px; /* Jarak lebih besar antar section */
+      margin-bottom: 60px;
+    }
+
+    /* Menghilangkan dekorasi link pada card */
+    #events-container a {
+      text-decoration: none;
+      color: inherit;
+      display: block;
+      transition: transform 0.3s ease;
+    }
+
+    #events-container a:hover {
+      transform: translateY(-8px);
     }
 
     .event-card-v2 {
@@ -148,17 +135,15 @@
       border-radius: 16px;
       overflow: hidden;
       box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-      transition: 0.3s;
+      height: 100%;
       display: flex;
       flex-direction: column;
       border: 1px solid #eef2f6;
     }
 
-    .event-card-v2:hover { transform: translateY(-5px); box-shadow: 0 10px 25px rgba(0,0,0,0.1); }
-
     .card-image-wrapper {
       position: relative;
-      height: 180px;
+      height: 200px;
     }
 
     .card-image-wrapper img {
@@ -169,14 +154,15 @@
 
     .status-label {
       position: absolute;
-      top: 10px;
-      right: 10px;
-      padding: 4px 12px;
+      top: 12px;
+      right: 12px;
+      padding: 5px 14px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 700;
       text-transform: uppercase;
       z-index: 2;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
     }
 
     .status-mendatang { background: #fef3c7; color: #92400e; }
@@ -186,54 +172,24 @@
     .card-body {
       padding: 20px;
       flex-grow: 1;
-      display: flex;
-      flex-direction: column;
     }
 
     .tag {
       display: inline-block;
-      background: #dbeafe;
+      background: #f0f7ff;
       color: #1e3a8a;
       padding: 4px 12px;
       border-radius: 20px;
       font-size: 11px;
       font-weight: 600;
-      margin-bottom: 10px;
-      width: fit-content;
+      margin-bottom: 12px;
     }
 
-    .card-body h4 { color: #1e3a8a; margin-bottom: 8px; font-size: 18px; }
-
-    .card-body p {
-      font-size: 13px;
-      color: #64748b;
-      margin-bottom: 15px;
-      line-height: 1.6;
-    }
-
-    .card-footer {
-      margin-top: auto;
-    }
-
-    .btn-regis {
-      display: block;
-      text-align: center;
-      padding: 10px;
-      background: #1e3a8a;
-      color: white;
-      text-decoration: none;
-      border-radius: 8px;
-      font-size: 13px;
-      font-weight: 600;
-      transition: 0.3s;
-    }
-
-    .btn-regis:hover { background: #2563eb; }
-
-    .btn-regis.disabled {
-      background: #e2e8f0;
-      color: #94a3b8;
-      pointer-events: none;
+    .card-body h4 { 
+      color: #1e3a8a; 
+      margin-bottom: 8px; 
+      font-size: 18px;
+      line-height: 1.4;
     }
 
     /* VIDEO SECTION */
@@ -258,23 +214,8 @@
 
     .video-container iframe {
       position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+      top: 0; left: 0; width: 100%; height: 100%;
       border: 0;
-    }
-
-    .video-info h3 {
-      color: #1e3a8a;
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .video-info p {
-      color: #4b5563;
-      line-height: 1.8;
-      text-align: justify;
     }
 
     /* FOOTER */
@@ -285,67 +226,64 @@
       font-size: 14px;
       color: #bfdbfe;
       margin-top: auto;
-      width: 100%;
     }
 
     @media (max-width: 768px) {
       header { flex-direction: column; gap: 15px; padding: 20px; }
       nav { flex-wrap: wrap; justify-content: center; }
+      .event-card-v2 { margin: 0 10px; }
     }
   </style>
 </head>
 
 <body>
+  <header></header>
 
- <header> </header>
-
- <main>
-  <div class="intro"></div>
-  
-  <section>
-    <div class="container">
-      
-      <div class="section-title">
-        <h2>Jadwal Kegiatan</h2>
-      </div>
-
-      <div class="events-grid" id="events-container">
-        <p style="text-align: center; grid-column: 1/-1; color: #64748b;">Memuat data kegiatan...</p>
-      </div>
-
-      <div class="section-title">
-        <h2>Dokumentasi Unggulan</h2>
-      </div>
-
-      <div class="video-card">
-        <span class="tag">Pengabdian Kepada Masyarakat</span>
+  <main>
+    <div class="intro"></div>
+    
+    <section>
+      <div class="container">
         
-        <div class="video-container">
-          <iframe 
-            src="https://www.youtube.com/embed/4w13jP-cshM" 
-            title="Transformasi Layanan Perpustakaan Melalui Penerapan Sistem Informasi" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-            allowfullscreen>
-          </iframe>
+        <div class="section-title">
+          <h2>Jadwal Kegiatan</h2>
         </div>
 
-        <div class="video-info">
-          <h3>Transformasi Layanan Perpustakaan Melalui Penerapan Sistem Informasi</h3>
-          <p>
-            Video ini mendokumentasikan kegiatan <strong>Pengabdian kepada Masyarakat</strong> yang berfokus pada modernisasi tata kelola perpustakaan. 
-            Dalam kegiatan ini, dilakukan penerapan sistem <strong>SLiMS (Senayan Library Management System)</strong> di <strong>Perpustakaan SMA Harapan 1 Medan</strong>. 
+        <div class="events-grid" id="events-container">
+          <p style="text-align: center; grid-column: 1/-1; color: #64748b; padding: 40px;">
+            <i class="fas fa-spinner fa-spin"></i> Memuat data kegiatan...
           </p>
         </div>
+
+        <div class="section-title">
+          <h2>Dokumentasi Unggulan</h2>
+        </div>
+
+        <div class="video-card">
+          <span class="tag">Pengabdian Kepada Masyarakat</span>
+          <div class="video-container">
+            <iframe 
+              src="https://www.youtube.com/embed/4w13jP-cshM" 
+              title="Transformasi Layanan Perpustakaan" 
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-info">
+            <h3 style="color: #1e3a8a; font-size: 22px; margin-bottom: 10px;">Transformasi Layanan Perpustakaan Melalui Penerapan Sistem Informasi</h3>
+            <p style="font-size: 14px; color: #475569; text-align: justify;">
+              Video ini mendokumentasikan kegiatan <strong>Pengabdian kepada Masyarakat</strong> yang berfokus pada modernisasi tata kelola perpustakaan melalui penerapan sistem <strong>SLiMS</strong>.
+            </p>
+          </div>
+        </div>
+
       </div>
+    </section>
+  </main>
 
-    </div>
-  </section>
- </main>
+  <footer></footer>
 
- <footer> </footer>
-
- <script src="script-kegiatan.js"></script>
- <script src="script.js"></script>
+  <script src="script-kegiatan.js"></script>
+  <script src="script.js"></script>
 
 </body>
 </html>

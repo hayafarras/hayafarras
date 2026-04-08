@@ -13,7 +13,7 @@ async function loadKegiatan() {
     return;
   }
 
-  const container = document.querySelector('.events-grid');
+  const container = document.getElementById('events-container');
   container.innerHTML = ''; // Hapus data statis bawaan HTML
 
   kegiatan.forEach(item => {

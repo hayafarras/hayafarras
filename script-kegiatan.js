@@ -14,37 +14,39 @@ async function loadKegiatan() {
   }
 
   const container = document.getElementById('events-container');
-  container.innerHTML = ''; // Hapus data statis bawaan HTML
+  container.innerHTML = ''; 
 
   kegiatan.forEach(item => {
-    // Logika tombol: Jika status 'Selesai', tombol tidak bisa diklik
     const isSelesai = item.status.toLowerCase() === 'selesai';
-    const btnLabel = isSelesai ? 'Pendaftaran Tutup' : 'Daftar Sekarang';
-    const btnClass = isSelesai ? 'btn-regis disabled' : 'btn-regis';
     
+    // --- FORMAT TANGGAL KE BAHASA INDONESIA ---
+    // Mengubah "2026-04-15" menjadi "15 April 2026"
+    const dateObj = new Date(item.tanggal);
+    const opsiTanggal = { day: 'numeric', month: 'long', year: 'numeric' };
+    const tanggalCantik = dateObj.toLocaleDateString('id-ID', opsiTanggal);
+
     // Tentukan class warna status
     let statusClass = 'status-mendatang';
     if(isSelesai) statusClass = 'status-selesai';
     if(item.status.toLowerCase() === 'aktif') statusClass = 'status-aktif';
 
+    // RENDER CARD (Sudah Clickable)
     container.innerHTML += `
-      <div class="event-card-v2">
-        <div class="card-image-wrapper">
-          <img src="${item.image_url || 'https://via.placeholder.com/400x200'}" alt="${item.judul}">
-          <span class="status-label ${statusClass}">${item.status}</span>
-        </div>
-        <div class="card-body">
-          <span class="tag">${item.kategori}</span>
-          <small style="display:block; color:#2563eb; font-weight:700; margin-bottom:5px;">
-            ${item.tanggal}
-          </small>
-          <h4>${item.judul}</h4>
-          <p>${item.deskripsi.substring(0, 100)}...</p>
-          <div class="card-footer">
-            <a href="${item.registrasi}" target="_blank" class="${btnClass}">${btnLabel}</a>
+      <a href="detail-kegiatan.html?id=${item.id}" style="text-decoration: none; color: inherit; display: block;">
+        <div class="event-card-v2">
+          <div class="card-image-wrapper">
+            <img src="${item.image_url || 'https://via.placeholder.com/400x200'}" alt="${item.judul}">
+            <span class="status-label ${statusClass}">${item.status}</span>
+          </div>
+          <div class="card-body">
+            <span class="tag">${item.kategori}</span>
+            <h4 style="margin-bottom: 5px;">${item.judul}</h4>
+            <small style="display:flex; align-items:center; gap:5px; color:#64748b; font-weight:600;">
+              <i class="far fa-calendar-alt"></i> ${tanggalCantik}
+            </small>
           </div>
         </div>
-      </div>
+      </a>
     `;
   });
 }

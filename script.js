@@ -50,13 +50,16 @@ document.addEventListener("DOMContentLoaded", function() {
         });
     }
 
-    // 5. LOGIKA KATALOG (SUPABASE)
-    const bookContainer = document.getElementById('bookContainer');
-    if (bookContainer) {
-        const SB_URL = 'https://zybrhmbjvhzrvpykgpux.supabase.co';
-        const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5YnJobWJqdmh6cnZweWtncHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMTY5MDUsImV4cCI6MjA4ODg5MjkwNX0.o301u_q0OAhElangyonZdKCRgxDMuTtoahictrGyHxA';
-        const _supabase = supabase.createClient(SB_URL, SB_KEY);
+    // KONFIGURASI SUPABASE (Dibuat sekali saja untuk dipakai bersama)
+    const SB_URL = 'https://zybrhmbjvhzrvpykgpux.supabase.co';
+    const SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp5YnJobWJqdmh6cnZweWtncHV4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzMzMTY5MDUsImV4cCI6MjA4ODg5MjkwNX0.o301u_q0OAhElangyonZdKCRgxDMuTtoahictrGyHxA';
+    
+    // Cek apakah library supabase sudah terload di HTML
+    const _supabase = (typeof supabase !== 'undefined') ? supabase.createClient(SB_URL, SB_KEY) : null;
 
+    // 5 & 6. LOGIKA KATALOG
+    const bookContainer = document.getElementById('bookContainer');
+    if (bookContainer && _supabase) {
         async function loadBooks() {
             const { data: books, error } = await _supabase.from('koleksi_buku').select('*');
             const loading = document.getElementById('loading');
@@ -70,7 +73,6 @@ document.addEventListener("DOMContentLoaded", function() {
             bookContainer.innerHTML = '';
 
             books.forEach(buku => {
-                // Seluruh kartu dibungkus tag <a> tanpa footer status/tombol
                 bookContainer.innerHTML += `
                     <a href="detail-buku.html?id=${buku.buku_id}" class="book-card-link" style="text-decoration: none; color: inherit; display: block;">
                         <div class="book-card">
@@ -86,43 +88,90 @@ document.addEventListener("DOMContentLoaded", function() {
         }
         loadBooks();
 
-        // 6. LOGIKA SEARCH (Klik Button/Enter)
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
 
         function performSearch() {
             const term = searchInput.value.toLowerCase();
             const cards = document.querySelectorAll('.book-card-link');
-            
             cards.forEach(card => {
                 const title = card.querySelector('.book-title').innerText.toLowerCase();
                 const author = card.querySelector('.book-author').innerText.toLowerCase();
-                
-                if (title.includes(term) || author.includes(term)) {
-                    card.style.display = 'block';
-                } else {
-                    card.style.display = 'none';
-                }
+                card.style.display = (title.includes(term) || author.includes(term)) ? 'block' : 'none';
             });
         }
 
-        // Listener Klik Tombol Search
-        if (searchBtn) {
-            searchBtn.addEventListener('click', performSearch);
-        }
-
-        // Listener Tombol Enter di Keyboard
+        if (searchBtn) searchBtn.addEventListener('click', performSearch);
         if (searchInput) {
             searchInput.addEventListener('keypress', function(e) {
-                if (e.key === 'Enter') {
-                    performSearch();
-                }
+                if (e.key === 'Enter') performSearch();
             });
         }
     }
-});
 
-// FUNGSI GLOBAL (PENTING: Di luar DOMContentLoaded)
+    // 7. LOGIKA HALAMAN KEGIATAN
+    const jadwalContainer = document.getElementById('jadwal-container');
+    const dokumentasiContainer = document.getElementById('dokumentasi-container');
+
+    if (jadwalContainer && _supabase) {
+        function formatTgl(tglString) {
+            const opsi = { day: 'numeric', month: 'long', year: 'numeric' };
+            return new Date(tglString).toLocaleDateString('id-ID', opsi);
+        }
+
+        async function loadKegiatan() {
+            const { data: listKegiatan, error } = await _supabase
+                .from('kegiatan')
+                .select('*')
+                .order('tanggal', { ascending: true });
+
+            if (error) {
+                jadwalContainer.innerHTML = "Gagal memuat data.";
+                return;
+            }
+
+            jadwalContainer.innerHTML = '';
+            dokumentasiContainer.innerHTML = '';
+
+            listKegiatan.forEach(item => {
+                const s = item.status.toLowerCase();
+                const statusClass = s.includes('mendatang') || s.includes('datang') ? 'status-mendatang' : 
+                                    s.includes('langsung') ? 'status-berlangsung' : 'status-berakhir';
+                
+                const k = item.kategori.toLowerCase();
+                const catClass = k === 'workshop' ? 'cat-workshop' : 
+                                 k === 'literasi' ? 'cat-literasi' : 'cat-edukatif';
+
+                if (s !== 'sudah berakhir') {
+                    jadwalContainer.innerHTML += `
+                        <a href="detail-kegiatan.html?id=${item.kegiatan_id}" class="event-card">
+                            <div class="event-img">
+                                <img src="${item.image_url || 'https://via.placeholder.com/400x250'}" alt="Event">
+                                <span class="badge-status ${statusClass}">${item.status}</span>
+                            </div>
+                            <div class="event-content">
+                                <div class="event-date">📅 ${formatTgl(item.tanggal)}</div>
+                                <h3 class="event-title">${item.judul}</h3>
+                                <span class="badge-cat ${catClass}">${item.kategori}</span>
+                            </div>
+                        </a>
+                    `;
+                } else {
+                    dokumentasiContainer.innerHTML += `
+                        <div class="doc-item">
+                            <span class="badge-cat ${catClass}">${item.kategori}</span>
+                            <h4>${item.judul}</h4>
+                            <a href="${item.registrasi}" target="_blank" class="doc-link">Buka Dokumentasi →</a>
+                        </div>
+                    `;
+                }
+            });
+        }
+        loadKegiatan();
+    }
+}); // <--- PENUTUP DOMContentLoaded YANG BENAR
+
+// --- FUNGSI GLOBAL TETAP DI LUAR ---
 function switchTab(type) {
     const loginForm = document.getElementById('login-form');
     const regForm = document.getElementById('register-form');

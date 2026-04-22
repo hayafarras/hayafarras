@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <a href="kegiatan.html" id="link-kegiatan">Kegiatan</a>
           <a href="kontak.html" id="link-kontak">Kontak</a>
           <a href="masuk.html" id="link-masuk">Masuk/Daftar</a>
+          <a href="looping.php" id="link-looping">Looping</a>
         </nav>
     `;
 

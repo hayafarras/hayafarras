@@ -112,10 +112,12 @@
       color: white;
       padding: 20px;
       display: block; 
-      min-width: 200%;
+      min-width: 100%;
+      max-width: 500px;
       line-height: 1.6;
       border: 1px solid #3b63a8;
-      border-radius: 8px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     }
 
     .text-list {

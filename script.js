@@ -13,7 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <a href="kontak.html" id="link-kontak">Kontak</a>
           <a href="masuk.html" id="link-masuk">Masuk/Daftar</a>
           <a href="http://lenterapublika.xo.je/looping.php" id="link-looping">Looping</a>
-          <a href="kalkulator.php" id="link-kalkulator">Kalkulator</a>
+          <a href="http://lenterapublika.xo.je/kalkulator.php" id="link-kalkulator">Kalkulator</a>
         </nav>
     `;
 

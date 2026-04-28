@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
           <a href="layanan.html" id="link-layanan">Layanan</a>
           <a href="kegiatan.html" id="link-kegiatan">Kegiatan</a>
           <a href="kontak.html" id="link-kontak">Kontak</a>
-          <a href="masuk.html" id="link-masuk">Masuk/Daftar</a>
+          <a href="http://lenterapublika.xo.je/masuk.php" id="link-masuk">Masuk/Daftar</a>
           <a href="http://lenterapublika.xo.je/looping.php" id="link-looping">Looping</a>
           <a href="http://lenterapublika.xo.je/kalkulator.php" id="link-kalkulator">Kalkulator</a>
         </nav>
